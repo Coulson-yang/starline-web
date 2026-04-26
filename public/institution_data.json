@@ -1,0 +1,930 @@
+{
+  "brand": {
+    "name": "英创起点",
+    "tagline": "您身边最专业的英语成长中心",
+    "heroImageUrl": "/images/home-hero.jpg",
+    "heroImageAlt": "外教与孩子在互动课堂中交流学习",
+    "trialCtaLabel": "预约试听",
+    "trialCtaHref": "/trial"
+  },
+  "liveStats": [
+    {
+      "id": "class_count",
+      "label": "班级数量",
+      "value": 16,
+      "suffix": "个",
+      "hint": "覆盖启蒙到进阶分层教学"
+    },
+    {
+      "id": "student_count",
+      "label": "学生数量",
+      "value": 286,
+      "suffix": "人",
+      "hint": "在读学员持续稳定增长"
+    },
+    {
+      "id": "hours",
+      "label": "累计课时",
+      "value": 12800,
+      "suffix": "+",
+      "hint": "自创办以来交付的有效课堂时长"
+    }
+  ],
+  "navCards": [
+    {
+      "id": "investment",
+      "title": "课程收费",
+      "subtitle": "收费标准 · 班型方案",
+      "href": "/investment",
+      "metric": "PLANS"
+    },
+    {
+      "id": "manifest",
+      "title": "课表时间",
+      "subtitle": "课时安排 · 上课时间",
+      "href": "/manifest",
+      "metric": "SCHEDULE"
+    },
+    {
+      "id": "fleet",
+      "title": "班级信息",
+      "subtitle": "班级容量 · 学生名单",
+      "href": "/fleet",
+      "metric": "FLEET"
+    },
+    {
+      "id": "crew",
+      "title": "师资及校区风采",
+      "subtitle": "师资展示 · 教学体系",
+      "href": "/crew-tech",
+      "metric": "CREW"
+    }
+  ],
+  "pricing": {
+    "plans": [
+      {
+        "id": "explorer",
+        "name": "Semester",
+        "headline": "学期班",
+        "priceDisplay": "¥5,980 / 期",
+        "lessonHours": 60,
+        "materialFeeDisplay": "含原版教材 + 练习册",
+        "activityFeeDisplay": "期末统一补课 3 次",
+        "perks": ["课程周期 18 周", "每周 2 次上课", "含 36 次正课", "平日：周三至周五晚其中 1 小时", "周末：其中 1.5 小时", "外教 + 中教联合授课"],
+        "highlight": true
+      },
+      {
+        "id": "voyager",
+        "name": "Holiday",
+        "headline": "假期班",
+        "priceDisplay": "¥2,880 / 期",
+        "lessonHours": 35,
+        "materialFeeDisplay": "教材练习册全包含",
+        "activityFeeDisplay": "含课间休息",
+        "perks": ["10天连上", "每天3.5小时", "上午 8:30-12:00", "中教外教1：1联合授课"],
+        "highlight": false
+      },
+      {
+        "id": "commander",
+        "name": "VIP",
+        "headline": "VIP班",
+        "priceDisplay": "¥180-300 / h",
+        "lessonHours": 0,
+        "materialFeeDisplay": "按需定制",
+        "activityFeeDisplay": "按需定制",
+        "perks": ["外教1V1听力口语提升", "雅思IELTS全程辅导", "大学英语四六级辅导 CET4-6", "成人旅游英语兴趣学习", "时间灵活安排", "1V1个性化定制"],
+        "highlight": false
+      }
+    ],
+    "refundPolicyTitle": "退费说明",
+    "refundPolicyBody": "由于客观因素无法继续课程需要退款的，按照剩余课时进行退款。教材与已发生的教学课程按实际扣除。具体以咨询老师为准，我们坚持透明、可预期的规则，退款预计1~3日到账。"
+  },
+  "schedule": {
+    "timezoneNote": "以下为示例课表窗口，实际排期以教务确认为准。",
+    "windows": [
+      {
+        "id": "wd-am",
+        "label": "工作日早班",
+        "days": "weekday",
+        "timeRange": "09:30 — 11:00"
+      },
+      {
+        "id": "wd-pm",
+        "label": "工作日晚班",
+        "days": "weekday",
+        "timeRange": "17:30 — 19:00"
+      },
+      {
+        "id": "we",
+        "label": "周末发射窗口",
+        "days": "weekend",
+        "timeRange": "10:00 — 12:00 · 14:00 — 16:00"
+      }
+    ],
+    "sessions": [
+      {
+        "id": "s-brazil-wed",
+        "title": "Brazil班",
+        "classId": "c-brazil",
+        "dayOfWeek": 3,
+        "startMinutes": 1110,
+        "endMinutes": 1170,
+        "status": "scheduled"
+      },
+      {
+        "id": "s-brazil-sat",
+        "title": "Brazil班",
+        "classId": "c-brazil",
+        "dayOfWeek": 6,
+        "startMinutes": 930,
+        "endMinutes": 1030,
+        "status": "scheduled"
+      },
+      {
+        "id": "s-finalnd-wed",
+        "title": "Finalnd班",
+        "classId": "c-finalnd",
+        "dayOfWeek": 3,
+        "startMinutes": 1110,
+        "endMinutes": 1170,
+        "status": "scheduled"
+      },
+      {
+        "id": "s-finalnd-sat",
+        "title": "Finalnd班",
+        "classId": "c-finalnd",
+        "dayOfWeek": 6,
+        "startMinutes": 510,
+        "endMinutes": 610,
+        "status": "scheduled"
+      },
+      {
+        "id": "s-newzealand-wed",
+        "title": "New Zealand班",
+        "classId": "c-new-zealand",
+        "dayOfWeek": 3,
+        "startMinutes": 1110,
+        "endMinutes": 1170,
+        "status": "scheduled"
+      },
+      {
+        "id": "s-canada-wed",
+        "title": "Canada班",
+        "classId": "c-canada",
+        "dayOfWeek": 3,
+        "startMinutes": 1170,
+        "endMinutes": 1230,
+        "status": "scheduled"
+      },
+      {
+        "id": "s-france-wed",
+        "title": "France班",
+        "classId": "c-france",
+        "dayOfWeek": 3,
+        "startMinutes": 1170,
+        "endMinutes": 1230,
+        "status": "scheduled"
+      },
+      {
+        "id": "s-ireland-thu",
+        "title": "Ireland班",
+        "classId": "c-ireland",
+        "dayOfWeek": 4,
+        "startMinutes": 1170,
+        "endMinutes": 1230,
+        "status": "scheduled"
+      },
+      {
+        "id": "s-greece-thu",
+        "title": "Greece班",
+        "classId": "c-greece",
+        "dayOfWeek": 4,
+        "startMinutes": 1170,
+        "endMinutes": 1230,
+        "status": "scheduled"
+      },
+      {
+        "id": "s-southafrica-fri",
+        "title": "South Africa班",
+        "classId": "c-south-africa",
+        "dayOfWeek": 5,
+        "startMinutes": 1110,
+        "endMinutes": 1170,
+        "status": "scheduled"
+      },
+      {
+        "id": "s-spain-fri",
+        "title": "Spain班",
+        "classId": "c-spain",
+        "dayOfWeek": 5,
+        "startMinutes": 1110,
+        "endMinutes": 1170,
+        "status": "scheduled"
+      },
+      {
+        "id": "s-monaco-fri",
+        "title": "Monaco班",
+        "classId": "c-monaco",
+        "dayOfWeek": 5,
+        "startMinutes": 1170,
+        "endMinutes": 1230,
+        "status": "scheduled"
+      },
+      {
+        "id": "s-italy-fri",
+        "title": "Italy班",
+        "classId": "c-italy",
+        "dayOfWeek": 5,
+        "startMinutes": 1170,
+        "endMinutes": 1230,
+        "status": "scheduled"
+      },
+      {
+        "id": "s-austrilia-fri",
+        "title": "Austrilia班",
+        "classId": "c-austrilia",
+        "dayOfWeek": 5,
+        "startMinutes": 1230,
+        "endMinutes": 1290,
+        "status": "scheduled"
+      },
+      {
+        "id": "s-croatia-fri",
+        "title": "Croatia班",
+        "classId": "c-croatia",
+        "dayOfWeek": 5,
+        "startMinutes": 1230,
+        "endMinutes": 1290,
+        "status": "scheduled"
+      },
+      {
+        "id": "s-denmark-fri",
+        "title": "Denmark班",
+        "classId": "c-denmark",
+        "dayOfWeek": 5,
+        "startMinutes": 1230,
+        "endMinutes": 1290,
+        "status": "scheduled"
+      },
+      {
+        "id": "s-portugal-fri",
+        "title": "Portugal班",
+        "classId": "c-portugal",
+        "dayOfWeek": 5,
+        "startMinutes": 1230,
+        "endMinutes": 1290,
+        "status": "scheduled"
+      },
+      {
+        "id": "s-finalnd-sat-am2",
+        "title": "Finalnd班",
+        "classId": "c-finalnd",
+        "dayOfWeek": 6,
+        "startMinutes": 510,
+        "endMinutes": 610,
+        "status": "scheduled"
+      },
+      {
+        "id": "s-italy-sat-am2",
+        "title": "Italy班",
+        "classId": "c-italy",
+        "dayOfWeek": 6,
+        "startMinutes": 510,
+        "endMinutes": 610,
+        "status": "scheduled"
+      },
+      {
+        "id": "s-canada-sat-noon",
+        "title": "Canada班",
+        "classId": "c-canada",
+        "dayOfWeek": 6,
+        "startMinutes": 630,
+        "endMinutes": 730,
+        "status": "scheduled"
+      },
+      {
+        "id": "s-newzealand-sat-noon",
+        "title": "New Zealand班",
+        "classId": "c-new-zealand",
+        "dayOfWeek": 6,
+        "startMinutes": 630,
+        "endMinutes": 730,
+        "status": "scheduled"
+      },
+      {
+        "id": "s-ireland-sat-noon",
+        "title": "Ireland班",
+        "classId": "c-ireland",
+        "dayOfWeek": 6,
+        "startMinutes": 630,
+        "endMinutes": 730,
+        "status": "scheduled"
+      },
+      {
+        "id": "s-southafrica-sat-pm",
+        "title": "South Africa班",
+        "classId": "c-south-africa",
+        "dayOfWeek": 6,
+        "startMinutes": 930,
+        "endMinutes": 1030,
+        "status": "scheduled"
+      },
+      {
+        "id": "s-brazil-sat-pm2",
+        "title": "Brazil班",
+        "classId": "c-brazil",
+        "dayOfWeek": 6,
+        "startMinutes": 930,
+        "endMinutes": 1030,
+        "status": "scheduled"
+      },
+      {
+        "id": "s-portugal-sat-pm",
+        "title": "Portugal班",
+        "classId": "c-portugal",
+        "dayOfWeek": 6,
+        "startMinutes": 930,
+        "endMinutes": 1030,
+        "status": "scheduled"
+      },
+      {
+        "id": "s-greece-sun-am",
+        "title": "Greece班",
+        "classId": "c-greece",
+        "dayOfWeek": 0,
+        "startMinutes": 510,
+        "endMinutes": 610,
+        "status": "scheduled"
+      },
+      {
+        "id": "s-denmark-sun-am",
+        "title": "Denmark班",
+        "classId": "c-denmark",
+        "dayOfWeek": 0,
+        "startMinutes": 510,
+        "endMinutes": 610,
+        "status": "scheduled"
+      },
+      {
+        "id": "s-croatia-sun-noon",
+        "title": "Croatia班",
+        "classId": "c-croatia",
+        "dayOfWeek": 0,
+        "startMinutes": 630,
+        "endMinutes": 730,
+        "status": "scheduled"
+      },
+      {
+        "id": "s-monaco-sun-noon",
+        "title": "Monaco班",
+        "classId": "c-monaco",
+        "dayOfWeek": 0,
+        "startMinutes": 630,
+        "endMinutes": 730,
+        "status": "scheduled"
+      },
+      {
+        "id": "s-austrilia-sun-noon",
+        "title": "Austrilia班",
+        "classId": "c-austrilia",
+        "dayOfWeek": 0,
+        "startMinutes": 630,
+        "endMinutes": 730,
+        "status": "scheduled"
+      },
+      {
+        "id": "s-france-sun-pm",
+        "title": "France班",
+        "classId": "c-france",
+        "dayOfWeek": 0,
+        "startMinutes": 930,
+        "endMinutes": 1030,
+        "status": "scheduled"
+      },
+      {
+        "id": "s-norway-thu",
+        "title": "Norway班",
+        "classId": "c-norway",
+        "dayOfWeek": 4,
+        "startMinutes": 1170,
+        "endMinutes": 1230,
+        "status": "scheduled"
+      },
+      {
+        "id": "s-norway-sat-am",
+        "title": "Norway班",
+        "classId": "c-norway",
+        "dayOfWeek": 6,
+        "startMinutes": 510,
+        "endMinutes": 610,
+        "status": "scheduled"
+      },
+      {
+        "id": "s-spain-sun-am",
+        "title": "Spain班",
+        "classId": "c-spain",
+        "dayOfWeek": 0,
+        "startMinutes": 510,
+        "endMinutes": 610,
+        "status": "scheduled"
+      }
+    ]
+  },
+  "classes": [
+    {
+      "id": "c-orion",
+      "name": "Orion 班",
+      "level": 3,
+      "capacity": 6,
+      "enrolled": 5,
+      "teacherId": "t-ava",
+      "teacherIds": ["t-ava", "t-liam"],
+      "students": [
+        { "alias": "学员 A1", "module": "Module 3" },
+        { "alias": "学员 A2", "module": "Module 3" },
+        { "alias": "学员 A3", "module": "Module 2" },
+        { "alias": "学员 A4", "module": "Module 3" },
+        { "alias": "学员 A5", "module": "Module 1" }
+      ]
+    },
+    {
+      "id": "c-nova",
+      "name": "Nova 班",
+      "level": 2,
+      "capacity": 6,
+      "enrolled": 6,
+      "teacherId": "t-liam",
+      "teacherIds": ["t-liam", "t-mia"],
+      "students": [
+        { "alias": "学员 B1", "module": "Module 2" },
+        { "alias": "学员 B2", "module": "Module 2" },
+        { "alias": "学员 B3", "module": "Module 2" },
+        { "alias": "学员 B4", "module": "Module 1" },
+        { "alias": "学员 B5", "module": "Module 2" },
+        { "alias": "学员 B6", "module": "Module 2" }
+      ]
+    },
+    {
+      "id": "c-atlas",
+      "name": "Atlas 班",
+      "level": 5,
+      "capacity": 4,
+      "enrolled": 3,
+      "teacherId": "t-mia",
+      "teacherIds": ["t-mia", "t-ava"],
+      "students": [
+        { "alias": "学员 C1", "module": "Module 5" },
+        { "alias": "学员 C2", "module": "Module 4" },
+        { "alias": "学员 C3", "module": "Module 5" }
+      ]
+    },
+    {
+      "id": "c-luna",
+      "name": "Luna 班",
+      "level": 1,
+      "capacity": 8,
+      "enrolled": 7,
+      "teacherId": "t-ava",
+      "teacherIds": ["t-ava", "t-liam"],
+      "students": [
+        { "alias": "学员 D1", "module": "Module 1" },
+        { "alias": "学员 D2", "module": "Module 1" },
+        { "alias": "学员 D3", "module": "Module 1" },
+        { "alias": "学员 D4", "module": "Module 1" },
+        { "alias": "学员 D5", "module": "Module 1" },
+        { "alias": "学员 D6", "module": "Module 1" },
+        { "alias": "学员 D7", "module": "Module 1" }
+      ]
+    },
+    {
+      "id": "c-brazil",
+      "name": "Brazil班",
+      "level": 1,
+      "gradeLabel": "一二年级提高班",
+      "material": "GW1",
+      "capacity": 10,
+      "enrolled": 8,
+      "teacherId": "t-camille",
+      "teacherIds": ["t-camille", "t-liam"],
+      "students": [
+        { "alias": "Dora", "module": "Dora", "gender": "female" },
+        { "alias": "Hunter", "module": "Hunter", "gender": "male" },
+        { "alias": "Ruby", "module": "Ruby", "gender": "female" },
+        { "alias": "Justin", "module": "Justin", "gender": "male" },
+        { "alias": "Jojo", "module": "Jojo", "gender": "male" },
+        { "alias": "Yana", "module": "Yana", "gender": "female" },
+        { "alias": "Leila", "module": "Leila", "gender": "female" },
+        { "alias": "Henry", "module": "Henry", "gender": "male" }
+      ]
+    },
+    {
+      "id": "c-finalnd",
+      "name": "Finalnd班",
+      "level": 2,
+      "gradeLabel": "六年级提高班",
+      "material": "GW5",
+      "capacity": 10,
+      "enrolled": 5,
+      "teacherId": "t-camille",
+      "teacherIds": ["t-camille", "t-ava"],
+      "students": [
+        { "alias": "Jenny", "module": "Jenny", "gender": "female" },
+        { "alias": "Lily", "module": "Lily", "gender": "female" },
+        { "alias": "Steven", "module": "Steven", "gender": "male" },
+        { "alias": "David", "module": "David", "gender": "male" },
+        { "alias": "Tina", "module": "Tina", "gender": "female" }
+      ]
+    },
+    {
+      "id": "c-new-zealand",
+      "name": "New Zealand班",
+      "level": 1,
+      "gradeLabel": "一年级提高班",
+      "material": "GW1",
+      "capacity": 10,
+      "enrolled": 6,
+      "teacherId": "t-liam",
+      "teacherIds": ["t-liam", "t-camille"],
+      "students": [
+        { "alias": "Jenny", "module": "Jenny", "gender": "female" },
+        { "alias": "Yoyo", "module": "Yoyo", "gender": "female" },
+        { "alias": "Nico", "module": "Nico", "gender": "female" },
+        { "alias": "Luna", "module": "Luna", "gender": "female" },
+        { "alias": "Jason", "module": "Jason", "gender": "male" },
+        { "alias": "Nancy", "module": "Nancy", "gender": "female" }
+      ]
+    },
+    {
+      "id": "c-canada",
+      "name": "Canada班",
+      "level": 4,
+      "gradeLabel": "三年级提高班",
+      "material": "GW3",
+      "capacity": 10,
+      "enrolled": 5,
+      "teacherId": "t-liam",
+      "teacherIds": ["t-liam", "t-camille"],
+      "students": [
+        { "alias": "Winster", "module": "Winster", "gender": "male" },
+        { "alias": "Vicky", "module": "Vicky", "gender": "female" },
+        { "alias": "Tiffany", "module": "Tiffany", "gender": "female" },
+        { "alias": "Yara", "module": "Yara", "gender": "female" },
+        { "alias": "John", "module": "John", "gender": "male" }
+      ]
+    },
+    {
+      "id": "c-france",
+      "name": "France班",
+      "level": 1,
+      "gradeLabel": "4-6岁小龄班",
+      "material": "KB1",
+      "capacity": 8,
+      "enrolled": 7,
+      "teacherId": "t-ava",
+      "teacherIds": ["t-ava", "t-mia"],
+      "students": [
+        { "alias": "Yaoyao", "module": "Yaoyao", "gender": "female" },
+        { "alias": "Lory", "module": "Lory", "gender": "female" },
+        { "alias": "Gina", "module": "Gina", "gender": "female" },
+        { "alias": "Domi", "module": "Domi", "gender": "male" },
+        { "alias": "Nancy", "module": "Nancy", "gender": "female" },
+        { "alias": "Yana", "module": "Yana", "gender": "female" },
+        { "alias": "Yuki", "module": "Yuki", "gender": "female" }
+      ]
+    },
+    {
+      "id": "c-ireland",
+      "name": "Ireland班",
+      "level": 1,
+      "gradeLabel": "一年级基础班",
+      "material": "GW1",
+      "capacity": 8,
+      "enrolled": 6,
+      "teacherId": "t-ava",
+      "teacherIds": ["t-ava", "t-mia"],
+      "students": [
+        { "alias": "Leo", "module": "Leo", "gender": "male" },
+        { "alias": "Lucas", "module": "Lucas", "gender": "male" },
+        { "alias": "Zero", "module": "Zero", "gender": "male" },
+        { "alias": "Tuan", "module": "Tuan", "gender": "male" },
+        { "alias": "Paul", "module": "Paul", "gender": "male" },
+        { "alias": "Joe", "module": "Joe", "gender": "male" }
+      ]
+    },
+    {
+      "id": "c-greece",
+      "name": "Greece班",
+      "level": 4,
+      "material": "GW3",
+      "capacity": 10,
+      "enrolled": 9,
+      "teacherId": "t-camille",
+      "teacherIds": ["t-camille", "t-ava"],
+      "students": [
+        { "alias": "Gina", "module": "Gina", "gender": "female" },
+        { "alias": "Zola", "module": "Zola", "gender": "female" },
+        { "alias": "Zara", "module": "Zara", "gender": "female" },
+        { "alias": "Jenny", "module": "Jenny", "gender": "female" },
+        { "alias": "Enter", "module": "Enter", "gender": "male" },
+        { "alias": "Charlie", "module": "Charlie", "gender": "male" },
+        { "alias": "George", "module": "George", "gender": "male" },
+        { "alias": "Chris", "module": "Chris", "gender": "male" },
+        { "alias": "Hazel", "module": "Hazel", "gender": "female" }
+      ]
+    },
+    {
+      "id": "c-south-africa",
+      "name": "South Africa班",
+      "level": 5,
+      "gradeLabel": "一二年级提高班",
+      "material": "GW1",
+      "capacity": 10,
+      "enrolled": 9,
+      "teacherId": "t-ava",
+      "teacherIds": ["t-ava", "t-camille"],
+      "students": [
+        { "alias": "Daisy", "module": "Daisy", "gender": "female" },
+        { "alias": "Ava", "module": "Ava", "gender": "female" },
+        { "alias": "Emily", "module": "Emily", "gender": "female" },
+        { "alias": "Sara", "module": "Sara", "gender": "female" },
+        { "alias": "Leila", "module": "Leila", "gender": "female" },
+        { "alias": "Jerry", "module": "Jerry", "gender": "male" },
+        { "alias": "Suzy", "module": "Suzy", "gender": "female" },
+        { "alias": "Alec", "module": "Alec", "gender": "male" },
+        { "alias": "Tina", "module": "Tina", "gender": "female" }
+      ]
+    },
+    {
+      "id": "c-spain",
+      "name": "Spain班",
+      "level": 1,
+      "gradeLabel": "2-4岁小龄班",
+      "material": "KBS",
+      "capacity": 8,
+      "enrolled": 4,
+      "teacherId": "t-ava",
+      "teacherIds": ["t-ava", "t-mia"],
+      "students": [
+        { "alias": "Yuyu", "module": "Yuyu", "gender": "male" },
+        { "alias": "Rayson", "module": "Rayson", "gender": "male" },
+        { "alias": "Yoyo", "module": "Yoyo", "gender": "female" },
+        { "alias": "Anna", "module": "Anna", "gender": "female" }
+      ]
+    },
+    {
+      "id": "c-monaco",
+      "name": "Monaco班",
+      "level": 1,
+      "gradeLabel": "初中纯外教班",
+      "material": "THINK QUICK 1",
+      "capacity": 5,
+      "enrolled": 2,
+      "teacherId": "t-ava",
+      "teacherIds": ["t-ava"],
+      "students": [
+        { "alias": "Zoe", "module": "Zoe", "gender": "female" },
+        { "alias": "Justin", "module": "Justin", "gender": "male" }
+      ]
+    },
+    {
+      "id": "c-italy",
+      "name": "Italy班",
+      "level": 4,
+      "gradeLabel": "五年级提高班",
+      "material": "GW3",
+      "capacity": 10,
+      "enrolled": 6,
+      "teacherId": "t-liam",
+      "teacherIds": ["t-liam", "t-mia"],
+      "students": [
+        { "alias": "Chason", "module": "Chason", "gender": "male" },
+        { "alias": "May", "module": "May", "gender": "female" },
+        { "alias": "Kane", "module": "Kane", "gender": "male" },
+        { "alias": "Riley", "module": "Riley", "gender": "female" },
+        { "alias": "Edward", "module": "Edward", "gender": "male" },
+        { "alias": "Summer", "module": "Summer", "gender": "male" }
+      ]
+    },
+    {
+      "id": "c-austrilia",
+      "name": "Austrilia班",
+      "level": 6,
+      "gradeLabel": "六年级提高班",
+      "material": "GW5",
+      "capacity": 10,
+      "enrolled": 6,
+      "teacherId": "t-ava",
+      "teacherIds": ["t-ava"],
+      "students": [
+        { "alias": "Sunny", "module": "Sunny", "gender": "male" },
+        { "alias": "Bella", "module": "Bella", "gender": "female" },
+        { "alias": "Kevin", "module": "Kevin", "gender": "male" },
+        { "alias": "Coco", "module": "Coco", "gender": "female" },
+        { "alias": "Yara", "module": "Yara", "gender": "female" },
+        { "alias": "Cindy", "module": "Cindy", "gender": "female" }
+      ]
+    },
+    {
+      "id": "c-croatia",
+      "name": "Croatia班",
+      "level": 6,
+      "gradeLabel": "五年级提高班",
+      "material": "GW4",
+      "capacity": 10,
+      "enrolled": 6,
+      "teacherId": "t-liam",
+      "teacherIds": ["t-liam", "t-camille"],
+      "students": [
+        { "alias": "Sara", "module": "Sara", "gender": "female" },
+        { "alias": "Ryan", "module": "Ryan", "gender": "male" },
+        { "alias": "James", "module": "James", "gender": "male" },
+        { "alias": "Billy", "module": "Billy", "gender": "male" },
+        { "alias": "Louis", "module": "Louis", "gender": "male" },
+        { "alias": "Cindy", "module": "Cindy", "gender": "female" }
+      ]
+    },
+    {
+      "id": "c-denmark",
+      "name": "Denmark班",
+      "level": 2,
+      "gradeLabel": "二升三基础班",
+      "material": "KB1",
+      "capacity": 10,
+      "enrolled": 8,
+      "teacherId": "t-liam",
+      "teacherIds": ["t-liam", "t-mia"],
+      "students": [
+        { "alias": "May", "module": "May", "gender": "female" },
+        { "alias": "Melody", "module": "Melody", "gender": "female" },
+        { "alias": "Xena", "module": "Xena", "gender": "female" },
+        { "alias": "Jack", "module": "Jack", "gender": "male" },
+        { "alias": "Hugo", "module": "Hugo", "gender": "male" },
+        { "alias": "Chase", "module": "Chase", "gender": "male" },
+        { "alias": "Anthony", "module": "Anthony", "gender": "male" },
+        { "alias": "Harry", "module": "Harry", "gender": "male" }
+      ]
+    },
+    {
+      "id": "c-portugal",
+      "name": "Portugal班",
+      "level": 3,
+      "gradeLabel": "三升四年级班",
+      "material": "GW1",
+      "capacity": 10,
+      "enrolled": 7,
+      "teacherId": "t-liam",
+      "teacherIds": ["t-liam", "t-mia"],
+      "students": [
+        { "alias": "Joy", "module": "Joy", "gender": "female" },
+        { "alias": "Hanna", "module": "Hanna", "gender": "female" },
+        { "alias": "Rich", "module": "Rich", "gender": "male" },
+        { "alias": "Jessy", "module": "Jessy", "gender": "male" },
+        { "alias": "Jasper", "module": "Jasper", "gender": "male" },
+        { "alias": "Bruce", "module": "Bruce", "gender": "male" },
+        { "alias": "Lucas", "module": "Lucas", "gender": "male" }
+      ]
+    },
+    {
+      "id": "c-norway",
+      "name": "Norway班",
+      "level": 1,
+      "gradeLabel": "小龄班",
+      "material": "KBS",
+      "capacity": 8,
+      "enrolled": 6,
+      "teacherId": "t-liam",
+      "teacherIds": ["t-liam", "t-mia"],
+      "students": [
+        { "alias": "Jasper", "module": "Jasper", "gender": "male" },
+        { "alias": "Wensa", "module": "Wensa", "gender": "female" },
+        { "alias": "Shelly", "module": "Shelly", "gender": "female" },
+        { "alias": "Wilson", "module": "Wilson", "gender": "male" },
+        { "alias": "Doudou", "module": "Doudou", "gender": "male" },
+        { "alias": "Lili", "module": "Lili", "gender": "male" }
+      ]
+    }
+  ],
+  "teachers": [
+    {
+      "id": "t-ava",
+      "name": "Stacey",
+      "code": "CMD-STACEY",
+      "portraitUrl": "/images/teacher-stacey.jpg",
+      "country": "俄罗斯",
+      "yearsExperience": 10,
+      "tags": ["语言专家", "口语专精", "不会画画的小说家不是好的英语老师"],
+      "bio": "1. 圣彼得堡大学语言学毕业。2. 十年职业教师生涯，五年儿童英语启蒙经验。3. 从0-1帮助学生塑造标准英语发音，自信开口。"
+    },
+    {
+      "id": "t-liam",
+      "name": "Ruzbeh",
+      "code": "CMD-RUZBEH",
+      "portraitUrl": "/images/teacher-ruzbeh.jpg",
+      "country": "美国",
+      "yearsExperience": 6,
+      "tags": ["孩子王最爱和孩子玩", "世界旅行者", "没有任何一个孩子在我的课堂上感到无聊"],
+      "bio": "1. 在美工作10余年，地地道道美式发音。2. 环游世界后定居蒙自，见多识广活泼开朗。3. 英创起点最受孩子喜欢的男老师。"
+    },
+    {
+      "id": "t-mia",
+      "name": "Daisy",
+      "code": "CMD-DAISY",
+      "portraitUrl": "/images/teacher-daisy.jpg",
+      "country": "云南",
+      "yearsExperience": 3,
+      "tags": ["教学严谨、纠音犀利", "应试高手，传授语法思维", "亲和力满分"],
+      "bio": "1. 深谙二语习得规律，以最接近母语者的发音和思维，带你跨越“中式英语”的隐形门槛。2. 她不仅是课堂上纠正每一个语法细节的严师，更是课后陪你练习、化解口语焦虑的知心好友。3. 凭借扎实的学术功底，她总结出一套高效的单词记忆与阅读逻辑，让学员少走弯路，实现降维打击。"
+    },
+    {
+      "id": "t-camille",
+      "name": "Camille",
+      "code": "CMD-CAMILLE",
+      "portraitUrl": "/images/teacher-camille.jpg",
+      "country": "云南",
+      "yearsExperience": 6,
+      "tags": ["英语领航人", "满分亲和力", "课堂气氛组"],
+      "bio": "1. 实战派提分专家：拥有多年一线高考英语教学沉淀，擅长精准拆解复杂语法，让看似枯燥的考点变成过目不忘的解题逻辑。2. 自带“降噪”属性的温柔姐姐：课堂上她是严谨的领路人，课后她是学生最信赖的倾听者，总能用温暖的话语化解备考中的焦虑与迷茫。3. 拒绝平庸的灵魂段子手：主张“有趣地进步”，擅长将艰涩的知识点融入幽默的课堂互动中，让学生在笑声中掌握高分秘籍。"
+    }
+  ],
+  "materials": [
+    {
+      "id": "m-core",
+      "title": "Core Flightpath 核心航迹",
+      "coverUrl": "https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=1200&q=80",
+      "system": "螺旋上升单元 + 项目式周任务",
+      "vocabulary": "分级词库 6,000+ 主动词汇触点",
+      "standards": "对标 CEFR A1–B2 · 衔接 Cambridge YLE",
+      "detail": "每个模块包含可迁移的语用任务与真实场景录音示范。"
+    },
+    {
+      "id": "m-lab",
+      "title": "Mission Lab 任务实验课",
+      "coverUrl": "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1200&q=80",
+      "system": "科学/艺术跨学科任务包",
+      "vocabulary": "学术高频词 + 口头报告脚手架",
+      "standards": "对齐 CEFR B1 口头陈述指标",
+      "detail": "以「任务简报—执行—复盘」三步模拟真实项目协作。"
+    }
+  ],
+  "gallery": [
+    {
+      "id": "g1",
+      "imageUrl": "/images/gallery-1.jpg",
+      "caption": "夜景校区路人视角"
+    },
+    {
+      "id": "g2",
+      "imageUrl": "/images/gallery-2.jpg",
+      "caption": "晚间课堂实况"
+    },
+    {
+      "id": "g3",
+      "imageUrl": "/images/gallery-3.jpg",
+      "caption": "机构外貌"
+    },
+    {
+      "id": "g4",
+      "imageUrl": "/images/gallery-4.jpg",
+      "caption": "剑桥原版教材"
+    },
+    {
+      "id": "g5",
+      "imageUrl": "/images/gallery-5.jpg",
+      "caption": "小组讨论&口语互动"
+    },
+    {
+      "id": "g6",
+      "imageUrl": "/images/gallery-6.jpg",
+      "caption": "夜间校区外景"
+    },
+    {
+      "id": "g7",
+      "imageUrl": "/images/gallery-7.jpg",
+      "caption": "节日专属礼品"
+    },
+    {
+      "id": "g8",
+      "imageUrl": "/images/gallery-8.jpg",
+      "caption": "课堂观摩与家校共育"
+    },
+    {
+      "id": "g9",
+      "imageUrl": "/images/gallery-9.jpg",
+      "caption": "家长公开课"
+    },
+    {
+      "id": "g10",
+      "imageUrl": "/images/gallery-10.jpg",
+      "caption": "假期班小班实况"
+    }
+  ],
+  "ageDistribution": [
+    { "age": "4岁", "count": 6 },
+    { "age": "5岁", "count": 9 },
+    { "age": "6岁", "count": 12 },
+    { "age": "7岁", "count": 15 },
+    { "age": "8岁", "count": 14 },
+    { "age": "9岁", "count": 11 },
+    { "age": "10岁", "count": 8 }
+  ]
+}

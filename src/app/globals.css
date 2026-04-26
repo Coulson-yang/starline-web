@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  @apply bg-deepSpace text-white antialiased;
+}
+
+::selection {
+  background: rgba(247, 127, 0, 0.35);
+  color: #ffffff;
+}
+
+@keyframes particleShift {
+  0% {
+    background-position: 0 0, 18px 10px, 0 0;
+  }
+  100% {
+    background-position: 36px 22px, -12px -8px, 0 0;
+  }
+}
+
+.particle-border {
+  position: relative;
+}
+
+.particle-border::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background:
+    radial-gradient(circle, rgba(37, 217, 210, 0.85) 1.2px, transparent 2px) 0 0/24px 24px,
+    radial-gradient(circle, rgba(247, 127, 0, 0.75) 1px, transparent 2px) 18px 10px/22px 22px,
+    linear-gradient(120deg, rgba(37, 217, 210, 0.55), rgba(247, 127, 0, 0.55));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0.7;
+  animation: particleShift 9s linear infinite;
+}
+
+.particle-border:hover::before {
+  opacity: 1;
+}

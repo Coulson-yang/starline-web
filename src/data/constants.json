@@ -1,0 +1,176 @@
+{
+  "investment": {
+    "courseTypes": [
+      {
+        "id": "kids",
+        "tone": "primary",
+        "tag": "3-12 Years",
+        "title": "少儿英语启蒙",
+        "description": "针对3-12岁。通过Kid's Box等教材，注重培养兴趣，自然习得语音语调，建立初步的英语思维。"
+      },
+      {
+        "id": "teens",
+        "tone": "secondary",
+        "tag": "10-16 Years",
+        "title": "青少年进阶课程",
+        "description": "针对10-16岁。使用Guess What!等教材，在语言学习中融入学科知识，搭建严谨的语言体系，开发逻辑思维。"
+      },
+      {
+        "id": "exam",
+        "tone": "primary",
+        "tag": "University+",
+        "title": "雅思/四六级辅导",
+        "description": "提供专业的雅思(IELTS)及大学英语四六级(CET-4/6)考试技巧与能力辅导，针对性强。"
+      },
+      {
+        "id": "adult",
+        "tone": "secondary",
+        "tag": "Adults",
+        "title": "成人旅游英语",
+        "description": "实用口语速成。专注于旅游场景下的真实交流，让您出国旅行沟通无障碍。"
+      }
+    ],
+    "planTitles": ["学期班", "假期班", "VIP班"],
+    "semesterRows": [
+      { "label": "上课数", "value": "36次课" },
+      { "label": "课时数", "value": "60课时" },
+      { "label": "课程周期", "value": "18周" },
+      { "label": "上课频率", "value": "每周两次课" },
+      { "label": "周中一次", "value": "三四五晚上其中1h" },
+      { "label": "周末一次", "value": "早上或下午其中1.5h" }
+    ],
+    "semesterPerks": [
+      "外教中教1：1联合授课",
+      "期末统一补课3次",
+      "教材练习本活动耗材全部包含，无任何后续费用"
+    ],
+    "holidayRows": [
+      { "label": "上课天数", "value": "10天连上" },
+      { "label": "每日时长", "value": "每天3.5小时" },
+      { "label": "上课时间", "value": "上午 8:30-12:00" },
+      { "label": "课间安排", "value": "含课间休息" }
+    ],
+    "holidayPerks": [
+      "学费 2880/期",
+      "教材练习册全包含",
+      "中教外教1：1联合授课",
+      "2-6岁儿童 2480/期 每天2.5h课程"
+    ],
+    "header": {
+      "eyebrow": "SERVICES & POLICIES",
+      "title": "课程类型 · 收费政策",
+      "desc": "下列方案仅限小班制教学，更多学习类型和定制VIP课程请点击“预约试听”添加老师进行咨询。"
+    },
+    "sections": {
+      "courseTitleZh": "课程类型",
+      "courseTitleEn": "Course Types",
+      "pricingTitleZh": "收费政策",
+      "pricingTitleEn": "Pricing Policy"
+    }
+  },
+  "crewTech": {
+    "header": {
+      "eyebrow": "FACULTY SHOWCASE & LEARNING SYSTEM",
+      "title": "师资展示 & 教学体系",
+      "desc": "在这里查看我们的师资水平和教学模式，浏览更多课堂魅力时刻。"
+    },
+    "sections": {
+      "crewTitle": "Crew Profiles",
+      "crewSub": "Native Commanders",
+      "materialsTitle": "Tech Stack",
+      "materialsSub": "Materials",
+      "galleryTitle": "Mission Gallery",
+      "gallerySub": "Classroom Telemetry"
+    },
+    "materialLabels": {
+      "system": "研发体系",
+      "vocabulary": "核心词汇量",
+      "standards": "国际标准"
+    },
+    "teacherQuotes": {
+      "t-ava": {
+        "en": "Tell me and i forget. Teach me and i remember. Involve me and I learn.",
+        "zh": "告诉我，我会忘记；传授我，我会记住；让我参与，我会学习。"
+      },
+      "t-liam": {
+        "en": "Students may forget what you said but they will not forget how much you made them feel.",
+        "zh": "学生或许会忘记我今日所言，但绝不会忘记我带给他们的感受。"
+      },
+      "t-mia": {
+        "en": "My dream is to become someone else's dream.",
+        "zh": "我的梦想是成为别人的梦想。"
+      },
+      "t-camille": {
+        "en": "Pursue Unlimited Radiance, Pave Lessons into Eminence.",
+        "zh": "追逐无限光芒，将每一课积淀为卓越。"
+      }
+    }
+  },
+  "homeGallery": {
+    "captionEnMap": {
+      "g1": "Campus Street View at Night",
+      "g2": "Evening Class in Action",
+      "g3": "Campus Exterior",
+      "g4": "Cambridge Original Materials",
+      "g5": "Group Discussion & Speaking Interaction",
+      "g6": "Night Campus Scene",
+      "g7": "Special Holiday Gifts",
+      "g8": "Class Observation & Home-School Collaboration",
+      "g9": "Open Class for Parents",
+      "g10": "Holiday Small-Class Snapshot"
+    },
+    "title": "课堂掠影画廊"
+  },
+  "attendance": {
+    "lock": {
+      "eyebrow": "MISSION LOCK",
+      "title": "输入授权代码",
+      "desc": "请输入 Authorization Key 进入学生考勤系统。",
+      "placeholder": "Authorization Key",
+      "unlock": "UNLOCK",
+      "home": "返回首页",
+      "error": "授权代码错误，请重试。"
+    },
+    "sheet": {
+      "eyebrow": "ATTENDANCE SHEET",
+      "title": "考勤表",
+      "studentHeader": "STUDENT",
+      "save": "SAVING",
+      "synced": "SYSTEM SYNCED",
+      "backup": "一键备份",
+      "backupFailed": "备份失败，请重试。"
+    },
+    "info": {
+      "eyebrow": "STUDENT ATTENDANCE INFO",
+      "title": "学生考勤信息",
+      "selectStudent": "选择学生",
+      "startDatePlaceholder": "开始日期 MM-DD",
+      "activeCount": "考勤次数",
+      "leaveCount": "请假次数",
+      "dateHeader": "日期",
+      "statusHeader": "考勤状态",
+      "active": "出席",
+      "leave": "请假",
+      "empty": "-",
+      "emptyTip": "请先从上方筛选并选择学生。"
+    },
+    "oneOnOne": {
+      "eyebrow": "1V1 STUDENT ATTENDANCE",
+      "title": "1V1 学生考勤信息",
+      "studentHeader": "STUDENT",
+      "manualTimeHint": "时间手动输入（示例：04-28 / 4-28）",
+      "students": [
+        { "name": "陈照", "track": "初中" },
+        { "name": "胡佳琳", "track": "初中" },
+        { "name": "薛珺婕", "track": "旅游英语" },
+        { "name": "杨晶", "track": "四级" },
+        { "name": "赵心如", "track": "四级" },
+        { "name": "高庆和", "track": "雅思" },
+        { "name": "石林艳", "track": "雅思" }
+      ]
+    },
+    "alerts": {
+      "quota": "本地存储空间不足，请清理浏览器缓存后重试。"
+    }
+  }
+}
