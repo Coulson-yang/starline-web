@@ -14,7 +14,7 @@ export function SiteHeader({ brandName }: { brandName: string; trialHref: string
   return (
     <header className="sticky top-0 z-40 border-b border-white/10 bg-deepSpace/80 backdrop-blur-md">
       <div className="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-2 sm:flex-row sm:items-center sm:justify-between sm:gap-3 sm:py-4">
-        <div className="flex items-center justify-center sm:justify-start">
+        <div className="flex items-center justify-start">
           <Link href="/" className="flex items-center gap-2 text-lg font-black tracking-tight text-white sm:gap-3 sm:text-3xl">
             <span className="relative h-8 w-8 overflow-hidden rounded-full border border-white/20 bg-white/5 sm:h-11 sm:w-11">
               <Image src="/images/brand-logo.png" alt="英创起点品牌Logo" fill className="object-cover" sizes="44px" />

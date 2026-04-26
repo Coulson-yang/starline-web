@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { type SyntheticEvent, useMemo, useState } from "react";
 import Image from "next/image";
 import constants from "@/data/constants.json";
 
@@ -18,6 +18,13 @@ export function HomePreviewGallery({ items }: { items: GalleryItem[] }) {
   const maxIndex = Math.max(0, items.length - 1);
   const current = useMemo(() => items[index] ?? items[0], [items, index]);
 
+  const onImgError = (e: SyntheticEvent<HTMLImageElement>) => {
+    const img = e.currentTarget;
+    if (img.dataset.fallbackApplied === "1") return;
+    img.dataset.fallbackApplied = "1";
+    img.src = "/images/gallery-3.jpg";
+  };
+
   if (!items?.length || !current) return null;
 
   return (
@@ -34,6 +41,7 @@ export function HomePreviewGallery({ items }: { items: GalleryItem[] }) {
             fill
             className="object-cover"
             sizes="(max-width: 1200px) 100vw, 1200px"
+            onError={onImgError}
           />
 
           <button

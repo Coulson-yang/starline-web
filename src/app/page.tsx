@@ -66,8 +66,8 @@ export default async function HomePage() {
         </div>
 
         <div className="relative mt-6">
-          <div className="-mx-1 flex snap-x snap-mandatory gap-4 overflow-x-auto px-1 md:mx-0 md:grid md:grid-cols-2 md:gap-4 md:overflow-visible md:px-0 lg:grid-cols-3">
-          <article className="w-[86%] shrink-0 snap-start rounded-3xl border border-white/10 bg-white/[0.03] p-5 transition duration-300 hover:-translate-y-1 hover:border-accent/50 hover:shadow-[0_12px_30px_rgba(0,0,0,0.35)] md:w-auto md:shrink md:snap-none">
+          <div className="-mx-1 flex snap-x snap-mandatory gap-4 overflow-x-auto px-1 [&>article]:w-[92%] [&>article]:shrink-0 [&>article]:snap-start md:mx-0 md:grid md:grid-cols-2 md:gap-4 md:overflow-visible md:px-0 md:[&>article]:w-auto md:[&>article]:shrink lg:grid-cols-3">
+          <article className="rounded-3xl border border-white/10 bg-white/[0.03] p-5 transition duration-300 hover:-translate-y-1 hover:border-accent/50 hover:shadow-[0_12px_30px_rgba(0,0,0,0.35)]">
             <div className="mb-4 inline-flex rounded-2xl border border-white/15 bg-deepSpace/70 p-3 text-accent">
               <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
@@ -118,12 +118,12 @@ export default async function HomePage() {
           <h2 className="text-3xl font-black tracking-tighter text-white sm:text-4xl">原版教材 · 科学体系</h2>
         </div>
 
-        <div className="mt-6 -mx-1 flex snap-x snap-mandatory gap-4 overflow-x-auto px-1 md:mx-0 md:grid md:grid-cols-2 md:gap-4 md:overflow-visible md:px-0">
-          <article className="flex h-full flex-col rounded-3xl border border-white/10 bg-white/[0.03] p-6 transition duration-300 hover:-translate-y-1 hover:border-accent/50 hover:shadow-[0_12px_30px_rgba(0,0,0,0.35)]">
+        <div className="mt-6 -mx-1 flex snap-x snap-mandatory gap-4 overflow-x-auto px-1 [&>article]:w-[92%] [&>article]:shrink-0 [&>article]:snap-start md:mx-0 md:grid md:grid-cols-2 md:gap-4 md:overflow-visible md:px-0 md:[&>article]:w-auto md:[&>article]:shrink">
+          <article className="flex h-full flex-col rounded-3xl border border-white/10 bg-white/[0.03] p-4 text-sm transition duration-300 hover:-translate-y-1 hover:border-accent/50 hover:shadow-[0_12px_30px_rgba(0,0,0,0.35)] sm:p-6 sm:text-base">
             <span className="mb-4 block h-1.5 w-12 rounded-full bg-accent" aria-hidden="true" />
-            <h3 className="text-2xl font-black tracking-tight text-white">剑桥原版教材: Kid&apos;s Box</h3>
+            <h3 className="text-xl font-black tracking-tight text-white sm:text-2xl">剑桥原版教材: Kid&apos;s Box</h3>
             <div className="mt-4 overflow-hidden rounded-2xl border border-white/10 bg-white/5">
-              <div className="relative mx-auto aspect-[3/4] w-full max-w-[300px]">
+              <div className="relative mx-auto aspect-[3/4] w-full max-w-[220px] sm:max-w-[300px]">
                 <Image src="/images/material-kids-box.jpg" alt="Kid&apos;s Box 教材封面" fill className="object-contain" sizes="(max-width: 768px) 70vw, 300px" />
               </div>
             </div>
@@ -158,7 +158,7 @@ export default async function HomePage() {
             </div>
           </article>
 
-          <article className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 transition duration-300 hover:-translate-y-1 hover:border-accent/50 hover:shadow-[0_12px_30px_rgba(0,0,0,0.35)]">
+          <article className="rounded-3xl border border-white/10 bg-white/[0.03] p-4 text-sm transition duration-300 hover:-translate-y-1 hover:border-accent/50 hover:shadow-[0_12px_30px_rgba(0,0,0,0.35)] sm:p-6 sm:text-base">
             <span className="mb-4 block h-1.5 w-12 rounded-full bg-accent" aria-hidden="true" />
             <h3 className="text-2xl font-black tracking-tight text-white">剑桥原版教材: Guess What!</h3>
             <div className="mt-4 overflow-hidden rounded-2xl border border-white/10 bg-white/5">
