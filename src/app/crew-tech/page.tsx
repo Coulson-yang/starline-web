@@ -29,16 +29,15 @@ export default async function CrewTechPage() {
           <h2 className="text-2xl font-black tracking-tight text-white">{ui.sections.crewTitle}</h2>
           <span className="text-xs uppercase tracking-[0.3em] text-white/40">{ui.sections.crewSub}</span>
         </div>
-        <div className="space-y-8">
+        <div className="-mx-1 flex snap-x snap-mandatory gap-4 overflow-x-auto px-1 md:mx-0 md:block md:space-y-8 md:overflow-visible md:px-0">
           {data.teachers.map((teacher) => (
-            <article key={teacher.id} className="grid gap-6 rounded-3xl border border-white/10 bg-white/[0.02] p-6 lg:grid-cols-[320px_1fr]">
+            <article key={teacher.id} className="w-[92%] shrink-0 snap-start grid gap-6 rounded-3xl border border-white/10 bg-white/[0.02] p-5 md:w-auto md:shrink md:snap-none md:p-6 lg:grid-cols-[320px_1fr]">
               <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl border border-white/10">
                 <Image src={teacher.portraitUrl} alt={teacher.name} fill className="object-cover" sizes="(min-width: 1024px) 320px, 100vw" />
               </div>
               <div className="flex min-h-full flex-col gap-4">
                 <div>
-                  <p className="text-xs uppercase tracking-[0.3em] text-accent">{teacher.code}</p>
-                  <h3 className="text-3xl font-black tracking-tighter text-white">{teacher.name}</h3>
+                  <h3 className="text-2xl font-black tracking-tighter text-white sm:text-3xl">{teacher.name}</h3>
                   <p className="text-sm text-white/60">
                     {teacher.country} · 教龄 {teacher.yearsExperience} 年
                   </p>
@@ -83,6 +82,7 @@ export default async function CrewTechPage() {
             </article>
           ))}
         </div>
+        <p className="text-center text-[11px] text-white/45 md:hidden">左右滑动切换老师卡片</p>
       </section>
 
 
