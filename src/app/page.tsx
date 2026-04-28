@@ -41,18 +41,20 @@ export default async function HomePage() {
       </section>
 
       <section className="mx-auto -mt-12 max-w-6xl px-4 sm:-mt-16">
-        <div className="relative">
-          <div className="-mx-1 flex snap-x snap-mandatory gap-3 overflow-x-auto px-1 sm:mx-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:overflow-visible sm:px-0">
-            {data.liveStats.map((stat) => (
-              <div key={stat.id} className="w-[90%] shrink-0 snap-start sm:w-auto sm:shrink sm:snap-none">
-                <TelemetryStat label={stat.label} value={stat.value} suffix={stat.suffix} hint={stat.hint} />
-              </div>
-            ))}
+        <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-4 backdrop-blur sm:p-6">
+          <div className="relative">
+            <div className="-mx-1 flex snap-x snap-mandatory gap-3 overflow-x-auto px-1 sm:mx-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:overflow-visible sm:px-0">
+              {data.liveStats.map((stat) => (
+                <div key={stat.id} className="w-[84%] shrink-0 snap-start sm:w-auto sm:shrink sm:snap-none">
+                  <TelemetryStat label={stat.label} value={stat.value} suffix={stat.suffix} hint={stat.hint} />
+                </div>
+              ))}
+            </div>
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-deepSpace/90 to-transparent sm:hidden" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-deepSpace/90 to-transparent sm:hidden" />
           </div>
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-deepSpace/90 to-transparent sm:hidden" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-deepSpace/90 to-transparent sm:hidden" />
+          <p className="mt-3 text-center text-[11px] text-white/45 sm:hidden">左右滑动查看更多</p>
         </div>
-        <p className="mt-3 text-center text-[11px] text-white/45 sm:hidden">左右滑动切换卡片</p>
       </section>
 
       <HomePreviewGallery items={data.gallery} />
