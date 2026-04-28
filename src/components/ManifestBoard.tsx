@@ -162,16 +162,16 @@ function ClassSchedulePopoverCard({
         }}
         className="cursor-pointer rounded-xl border border-white/10 bg-deepSpace/70 p-1 text-[10px] text-white/80 transition duration-300 hover:-translate-y-0.5 hover:border-accent/50 hover:shadow-[0_10px_26px_rgba(0,0,0,0.35)] sm:p-3 sm:text-xs"
       >
-        <div className="flex items-start justify-between gap-3">
+        <div className="flex items-start justify-between gap-2 md:gap-3">
           <div className="min-w-0">
-            <div className="flex items-center gap-2">
-              <span className="font-semibold text-white">{classDisplayTitle(session)}</span>
-              {live ? <span className="rounded-full bg-accent px-2 py-0.5 text-[10px] font-bold text-white">LIVE</span> : null}
+            <div className="flex items-center gap-1.5 md:gap-2">
+              <span className="text-[11px] font-semibold leading-4 text-white md:text-xs">{classDisplayTitle(session)}</span>
+              {live ? <span className="rounded-full bg-accent px-1.5 py-0.5 text-[9px] font-bold text-white md:px-2 md:text-[10px]">LIVE</span> : null}
             </div>
-            <p className="mt-2 text-[11px] text-white/55">{teacherText || "待排教师"}</p>
+            <p className="mt-1.5 text-[10px] leading-4 text-white/60 md:mt-2 md:text-[11px]">{teacherText || "待排教师"}</p>
           </div>
           {showSeatDots ? (
-            <div className="grid grid-cols-5 gap-1.5 pt-0.5" aria-label="班级人数圆点">
+            <div className="hidden grid-cols-5 gap-1.5 pt-0.5 md:grid" aria-label="班级人数圆点">
               {classSeatDots(session, classes).map((filled, idx) => (
                 <span
                   key={`${session.id}-dot-${idx}`}
