@@ -19,12 +19,13 @@ type AttendanceStore = {
   };
 };
 
-const STORAGE_KEY = "starline_class_data";
+const STORAGE_KEY = "starline_class_data_v2";
 const LEGACY_STORAGE_KEY = "attendance-board-v1";
 const AUTH_CODE = "8888";
 const COLUMN_COUNT = 36;
 const TEACHER_MARKS = ["R", "C", "S", "D"] as const;
 const hiddenClassIds = new Set(["c-orion", "c-luna", "c-atlas", "c-nova"]);
+const SHEET_OPTIONS = [1, 2, 3, 4, 5] as const;
 
 function md(date: Date) {
   const month = `${date.getMonth() + 1}`.padStart(2, "0");
@@ -47,7 +48,9 @@ function monthDayParts(value: string) {
 }
 
 function normalizeDateToken(value: string) {
-  const parts = (value || "").split("-");
+  const raw = (value || "").trim();
+  if (!raw) return "";
+  const parts = raw.split("-");
   if (parts.length === 2) {
     const [m, d] = parts;
     return `${`${Math.max(1, Math.min(12, Number(m) || 1))}`.padStart(2, "0")}-${`${Math.max(1, Math.min(31, Number(d) || 1))}`.padStart(2, "0")}`;
@@ -56,7 +59,7 @@ function normalizeDateToken(value: string) {
     const [, m, d] = parts;
     return `${`${Math.max(1, Math.min(12, Number(m) || 1))}`.padStart(2, "0")}-${`${Math.max(1, Math.min(31, Number(d) || 1))}`.padStart(2, "0")}`;
   }
-  return md(new Date());
+  return "";
 }
 
 function monthDayToRank(value: string) {
@@ -72,6 +75,10 @@ function defaultDates() {
     d.setDate(now.getDate() + i);
     return md(d);
   });
+}
+
+function emptyDates() {
+  return Array.from({ length: COLUMN_COUNT }, () => "");
 }
 
 function classDisplayName(name: string) {
@@ -127,6 +134,7 @@ export function AttendanceBoard({ classes }: { classes: ClassItem[] }) {
   const [authError, setAuthError] = useState("");
 
   const [selectedClassId, setSelectedClassId] = useState(classOptions[0]?.id ?? "");
+  const [selectedSheet, setSelectedSheet] = useState<1 | 2 | 3 | 4 | 5>(1);
   const [dates, setDates] = useState<string[]>(defaultDates());
   const [teacherMarks, setTeacherMarks] = useState<string[]>(Array.from({ length: COLUMN_COUNT }, () => "R"));
   const [statusMap, setStatusMap] = useState<Record<string, AttendanceStatus>>({});
@@ -136,8 +144,7 @@ export function AttendanceBoard({ classes }: { classes: ClassItem[] }) {
   const [infoClassId, setInfoClassId] = useState(classOptions[0]?.id ?? "");
   const [infoStudentAlias, setInfoStudentAlias] = useState("");
   const [infoStartDate, setInfoStartDate] = useState("");
-  const [infoDates, setInfoDates] = useState<string[]>(defaultDates());
-  const [infoStatusMap, setInfoStatusMap] = useState<Record<string, AttendanceStatus>>({});
+  const [infoRows, setInfoRows] = useState<Array<{ date: string; status: AttendanceStatus }>>([]);
 
   const oneOnOneStudents = ui.oneOnOne.students as Array<{ name: string; track: string }>;
   const [oneDates, setOneDates] = useState<string[]>(defaultDates());
@@ -147,6 +154,8 @@ export function AttendanceBoard({ classes }: { classes: ClassItem[] }) {
   const [oneSelectedName, setOneSelectedName] = useState("");
 
   const selectedClass = useMemo(() => classOptions.find((c) => c.id === selectedClassId) ?? null, [classOptions, selectedClassId]);
+  const selectedSheetKey = useMemo(() => `${selectedClassId}__sheet_${selectedSheet}`, [selectedClassId, selectedSheet]);
+  const isSheetOne = selectedSheet === 1;
 
   const infoClass = useMemo(() => classOptions.find((c) => c.id === infoClassId) ?? null, [classOptions, infoClassId]);
 
@@ -161,18 +170,9 @@ export function AttendanceBoard({ classes }: { classes: ClassItem[] }) {
   }, [infoClass, infoStudentAlias]);
 
   const selectedStudentRows = useMemo(() => {
-    if (!infoStudent) return [] as { date: string; status: AttendanceStatus }[];
     const startRank = infoStartDate ? monthDayToRank(infoStartDate) : 0;
-
-    return Array.from({ length: COLUMN_COUNT })
-      .map((_, colIdx) => {
-        const key = `${infoStudent.alias}__${colIdx}`;
-        const status = infoStatusMap[key] ?? "empty";
-        const date = infoDates[colIdx] ?? "";
-        return { date, status };
-      })
-      .filter((row) => !startRank || monthDayToRank(row.date) >= startRank);
-  }, [infoStudent, infoStatusMap, infoDates, infoStartDate]);
+    return infoRows.filter((row) => row.status !== "empty" && (!startRank || monthDayToRank(row.date) >= startRank));
+  }, [infoRows, infoStartDate]);
 
   const oneSelectedStudent = useMemo(() => {
     if (!oneSelectedName) return oneOnOneStudents[0] ?? null;
@@ -188,7 +188,7 @@ export function AttendanceBoard({ classes }: { classes: ClassItem[] }) {
 
     const raw = window.localStorage.getItem(STORAGE_KEY);
     if (!raw) {
-      setDates(defaultDates());
+      setDates(isSheetOne ? defaultDates() : emptyDates());
       setTeacherMarks(Array.from({ length: COLUMN_COUNT }, () => "R"));
       setStatusMap({});
       return;
@@ -196,30 +196,30 @@ export function AttendanceBoard({ classes }: { classes: ClassItem[] }) {
     try {
       const parsed = JSON.parse(raw) as AttendanceStore;
       if (!selectedClassId) return;
-      setDates(parsed.datesByClass[selectedClassId] ?? defaultDates());
-      setTeacherMarks(parsed.teacherMarksByClass?.[selectedClassId] ?? Array.from({ length: COLUMN_COUNT }, () => "R"));
-      setStatusMap(parsed.statusByClass[selectedClassId] ?? {});
+      setDates(parsed.datesByClass[selectedSheetKey] ?? (isSheetOne ? defaultDates() : emptyDates()));
+      setTeacherMarks(parsed.teacherMarksByClass?.[selectedSheetKey] ?? Array.from({ length: COLUMN_COUNT }, () => "R"));
+      setStatusMap(parsed.statusByClass[selectedSheetKey] ?? {});
     } catch {
-      setDates(defaultDates());
+      setDates(isSheetOne ? defaultDates() : emptyDates());
       setStatusMap({});
     }
-  }, [selectedClassId]);
+  }, [selectedClassId, selectedSheetKey, isSheetOne]);
 
   useEffect(() => {
     if (!selectedClassId) return;
     const currentClass = classOptions.find((c) => c.id === selectedClassId);
 
     handleSave((current) => {
-      current.datesByClass[selectedClassId] = dates;
-      current.teacherMarksByClass[selectedClassId] = teacherMarks;
-      current.statusByClass[selectedClassId] = statusMap;
-      current.classesMeta[selectedClassId] = {
-        className: currentClass ? classDisplayName(currentClass.name) : selectedClassId,
+      current.datesByClass[selectedSheetKey] = dates;
+      current.teacherMarksByClass[selectedSheetKey] = teacherMarks;
+      current.statusByClass[selectedSheetKey] = statusMap;
+      current.classesMeta[selectedSheetKey] = {
+        className: currentClass ? `${classDisplayName(currentClass.name)} · 表${selectedSheet}` : selectedClassId,
         students: currentClass ? currentClass.students.map((s) => s.alias) : [],
       };
       return current;
     });
-  }, [dates, teacherMarks, statusMap, selectedClassId, classOptions, handleSave]);
+  }, [dates, teacherMarks, statusMap, selectedClassId, selectedSheetKey, selectedSheet, classOptions, handleSave]);
 
   useEffect(() => {
     handleSave((current) => {
@@ -250,23 +250,39 @@ export function AttendanceBoard({ classes }: { classes: ClassItem[] }) {
     if (!infoClassId) return;
     const raw = window.localStorage.getItem(STORAGE_KEY);
     if (!raw) {
-      setInfoDates(defaultDates());
-      setInfoStatusMap({});
+      setInfoRows([]);
       return;
     }
     try {
       const parsed = JSON.parse(raw) as Partial<AttendanceStore>;
-      setInfoDates(parsed.datesByClass?.[infoClassId] ?? defaultDates());
-      setInfoStatusMap(parsed.statusByClass?.[infoClassId] ?? {});
+      const rows: Array<{ date: string; status: AttendanceStatus }> = [];
+      const alias = infoStudentAlias;
+
+      if (alias) {
+        SHEET_OPTIONS.forEach((sheetNo) => {
+          const keyPrefix = `${infoClassId}__sheet_${sheetNo}`;
+          const datesOfSheet = parsed.datesByClass?.[keyPrefix] ?? (sheetNo === 1 ? defaultDates() : emptyDates());
+          const statusMapOfSheet = parsed.statusByClass?.[keyPrefix] ?? {};
+
+          Array.from({ length: COLUMN_COUNT }).forEach((_, colIdx) => {
+            const cellKey = `${alias}__${colIdx}`;
+            const status = statusMapOfSheet[cellKey] ?? "empty";
+            const date = datesOfSheet[colIdx] ?? "";
+            rows.push({ date, status });
+          });
+        });
+      }
+
+      rows.sort((a, b) => monthDayToRank(a.date) - monthDayToRank(b.date));
+      setInfoRows(rows);
       setOneDates(parsed.oneOnOne?.dates ?? defaultDates());
       setOneStatusMap(parsed.oneOnOne?.statusMap ?? {});
     } catch {
-      setInfoDates(defaultDates());
-      setInfoStatusMap({});
+      setInfoRows([]);
       setOneDates(defaultDates());
       setOneStatusMap({});
     }
-  }, [infoClassId, dates, statusMap]);
+  }, [infoClassId, infoStudentAlias, dates, statusMap]);
 
   const onDateChange = (idx: number, value: string) => {
     setDates((prev) => prev.map((item, i) => (i === idx ? value : item)));
@@ -299,6 +315,11 @@ export function AttendanceBoard({ classes }: { classes: ClassItem[] }) {
       delete next[key];
       return next;
     });
+  };
+
+  const isMobileViewport = () => {
+    if (typeof window === "undefined") return false;
+    return window.matchMedia("(max-width: 767px)").matches;
   };
 
   const submitAuth = () => {
@@ -405,7 +426,7 @@ export function AttendanceBoard({ classes }: { classes: ClassItem[] }) {
                 </span>
               ) : null}
             </div>
-            <div className="grid w-full gap-2 md:grid-cols-2">
+            <div className="grid w-full gap-2 md:grid-cols-[minmax(0,1fr)_120px_140px]">
               <select
                 value={selectedClassId}
                 onChange={(e) => setSelectedClassId(e.target.value)}
@@ -414,6 +435,17 @@ export function AttendanceBoard({ classes }: { classes: ClassItem[] }) {
                 {classOptions.map((item) => (
                   <option key={item.id} value={item.id}>
                     {classDisplayName(item.name)}
+                  </option>
+                ))}
+              </select>
+              <select
+                value={selectedSheet}
+                onChange={(e) => setSelectedSheet(Number(e.target.value) as 1 | 2 | 3 | 4 | 5)}
+                className="rounded-xl border border-white/15 bg-deepSpace/60 px-3 py-2.5 text-sm text-white outline-none transition focus:border-accent"
+              >
+                {SHEET_OPTIONS.map((sheetNo) => (
+                  <option key={sheetNo} value={sheetNo}>
+                    表 {sheetNo}
                   </option>
                 ))}
               </select>
@@ -442,7 +474,7 @@ export function AttendanceBoard({ classes }: { classes: ClassItem[] }) {
                     onMouseEnter={() => setHoverCol(colIdx)}
                     onMouseLeave={() => setHoverCol(null)}
                   >
-                    <div className="relative mx-auto flex h-14 w-14 flex-col items-center justify-center rounded-md border border-white/15 bg-white/5 px-1 py-1">
+                    <div className="relative mx-auto flex h-14 w-14 flex-col items-center justify-center rounded-md border border-white/15 bg-white/5 px-1 py-1 text-center">
                       <button
                         type="button"
                         onClick={() => cycleTeacherMark(colIdx)}
@@ -452,15 +484,22 @@ export function AttendanceBoard({ classes }: { classes: ClassItem[] }) {
                         {teacherMarks[colIdx] ?? "R"}
                       </button>
                       <select
-                        value={monthDayParts(dates[colIdx] ?? "").day || "1"}
+                        value={monthDayParts(dates[colIdx] ?? "").day || ""}
                         onChange={(e) => {
-                          const day = Math.max(1, Math.min(31, Number(e.target.value || 1)));
+                          const dayValue = e.target.value;
                           const current = normalizeDateToken(dates[colIdx] ?? "");
-                          const [mm] = current.split("-");
-                          onDateChange(colIdx, `${mm}-${`${day}`.padStart(2, "0")}`);
+                          const [mm] = current ? current.split("-") : ["", ""];
+                          if (!dayValue) {
+                            onDateChange(colIdx, "");
+                            return;
+                          }
+                          const day = Math.max(1, Math.min(31, Number(dayValue || 1)));
+                          const month = mm || "01";
+                          onDateChange(colIdx, `${month}-${`${day}`.padStart(2, "0")}`);
                         }}
                         className="w-full appearance-none border-0 bg-transparent text-center text-sm font-bold text-white outline-none"
                       >
+                        <option value="" className="bg-deepSpace text-white">无</option>
                         {Array.from({ length: 31 }, (_, i) => String(i + 1)).map((day) => (
                           <option key={day} value={day} className="bg-deepSpace text-white">
                             {day}
@@ -469,15 +508,22 @@ export function AttendanceBoard({ classes }: { classes: ClassItem[] }) {
                       </select>
                       <div className="my-0.5 h-px w-8 bg-white/20" />
                       <select
-                        value={monthDayParts(dates[colIdx] ?? "").month || "1"}
+                        value={monthDayParts(dates[colIdx] ?? "").month || ""}
                         onChange={(e) => {
-                          const month = Math.max(1, Math.min(12, Number(e.target.value || 1)));
+                          const monthValue = e.target.value;
                           const current = normalizeDateToken(dates[colIdx] ?? "");
-                          const [, dd] = current.split("-");
-                          onDateChange(colIdx, `${`${month}`.padStart(2, "0")}-${dd}`);
+                          const [, dd] = current ? current.split("-") : ["", ""];
+                          if (!monthValue) {
+                            onDateChange(colIdx, "");
+                            return;
+                          }
+                          const month = Math.max(1, Math.min(12, Number(monthValue || 1)));
+                          const day = dd || "01";
+                          onDateChange(colIdx, `${`${month}`.padStart(2, "0")}-${day}`);
                         }}
                         className="w-full appearance-none border-0 bg-transparent text-center text-sm font-bold text-white outline-none"
                       >
+                        <option value="" className="bg-deepSpace text-white">无</option>
                         {Array.from({ length: 12 }, (_, i) => String(i + 1)).map((month) => (
                           <option key={month} value={month} className="bg-deepSpace text-white">
                             {month}
@@ -515,6 +561,9 @@ export function AttendanceBoard({ classes }: { classes: ClassItem[] }) {
                           setHoverCol(null);
                         }}
                         onClick={() => toggleStatus(student.alias, colIdx)}
+                        onDoubleClick={() => {
+                          if (isMobileViewport()) clearStatus(student.alias, colIdx);
+                        }}
                         onContextMenu={(e) => {
                           e.preventDefault();
                           clearStatus(student.alias, colIdx);
@@ -551,6 +600,7 @@ export function AttendanceBoard({ classes }: { classes: ClassItem[] }) {
                 </option>
               ))}
             </select>
+
             <select
               value={infoStudentAlias}
               onChange={(e) => setInfoStudentAlias(e.target.value)}
@@ -736,6 +786,9 @@ export function AttendanceBoard({ classes }: { classes: ClassItem[] }) {
                           setOneHoverCol(null);
                         }}
                         onClick={() => toggleOneStatus(oneSelectedStudent.name, colIdx)}
+                        onDoubleClick={() => {
+                          if (isMobileViewport()) clearOneStatus(oneSelectedStudent.name, colIdx);
+                        }}
                         onContextMenu={(e) => {
                           e.preventDefault();
                           clearOneStatus(oneSelectedStudent.name, colIdx);
