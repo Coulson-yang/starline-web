@@ -413,18 +413,15 @@ export function AttendanceBoard({ classes }: { classes: ClassItem[] }) {
             <h2 className="text-2xl font-black tracking-tight text-white">{ui.sheet.title}</h2>
           </div>
           <div className="flex w-full flex-col gap-2 md:w-[560px]">
-            <div className="flex items-center justify-end">
-              {isSaving ? (
-                <span className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.14em] text-accent">
-                  <span className="h-2 w-2 animate-pulse rounded-full bg-accent" />
-                  {ui.sheet.save}
-                </span>
-              ) : isSynced ? (
-                <span className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.14em] text-emerald-300">
-                  <span className="h-2 w-2 rounded-full bg-emerald-300" />
-                  {ui.sheet.synced}
-                </span>
-              ) : null}
+            <div className="flex h-5 items-center justify-end">
+              <span
+                className={`inline-flex items-center gap-2 text-xs uppercase tracking-[0.14em] transition-opacity ${
+                  isSaving ? "text-accent opacity-100" : isSynced ? "text-emerald-300 opacity-100" : "opacity-0"
+                }`}
+              >
+                <span className={`h-2 w-2 rounded-full ${isSaving ? "animate-pulse bg-accent" : "bg-emerald-300"}`} />
+                {isSaving ? ui.sheet.save : ui.sheet.synced}
+              </span>
             </div>
             <div className="grid w-full gap-2 md:grid-cols-[minmax(0,1fr)_120px_140px]">
               <select
@@ -474,7 +471,7 @@ export function AttendanceBoard({ classes }: { classes: ClassItem[] }) {
                     onMouseEnter={() => setHoverCol(colIdx)}
                     onMouseLeave={() => setHoverCol(null)}
                   >
-                    <div className="relative mx-auto flex h-14 w-14 flex-col items-center justify-center rounded-md border border-white/15 bg-white/5 px-1 py-1 text-center">
+                    <div className="relative mx-auto flex h-16 w-16 flex-col items-center justify-center rounded-md border border-white/15 bg-white/5 px-1 py-1 text-center">
                       <button
                         type="button"
                         onClick={() => cycleTeacherMark(colIdx)}
@@ -568,8 +565,8 @@ export function AttendanceBoard({ classes }: { classes: ClassItem[] }) {
                           e.preventDefault();
                           clearStatus(student.alias, colIdx);
                         }}
-                        className={`cursor-pointer border-b border-l border-white/5 px-1 py-1 text-center text-xs transition ${highlighted ? "bg-white/10" : "bg-transparent hover:bg-white/5"}`}
-                        style={{ width: 36, height: 36, minWidth: 36 }}
+                        className={`cursor-pointer border-b border-l border-white/5 p-0 text-center text-xs transition ${highlighted ? "bg-white/10" : "bg-transparent hover:bg-white/5"}`}
+                        style={{ width: 48, height: 48, minWidth: 48 }}
                       >
                         {status === "active" ? <span className="text-sm text-emerald-300">√</span> : status === "leave" ? <span className="text-sm font-semibold text-accent">假</span> : null}
                       </td>
