@@ -24,8 +24,9 @@ export function AboutHeroSection() {
   }, []);
 
   const overlayOpacity = 0.06 + progress * 0.72;
-  const contentOpacity = Math.max(0.08, progress);
-  const contentTranslate = (1 - progress) * 30;
+  const reveal = progress > 0.2;
+  const contentOpacity = reveal ? 1 : 0;
+  const contentTranslate = reveal ? 0 : 28;
 
   return (
     <section className="relative isolate h-screen w-full overflow-hidden">
@@ -35,13 +36,13 @@ export function AboutHeroSection() {
         style={{ opacity: overlayOpacity }}
       />
 
-      <div className="relative z-10 mx-auto flex h-full w-full max-w-6xl flex-col items-center justify-center px-4" style={{ opacity: contentOpacity, transform: `translateY(${contentTranslate}px)` }}>
+      <div className="relative z-10 mx-auto flex h-full w-full max-w-6xl flex-col items-center justify-start px-4 pt-12 sm:justify-center sm:pt-0" style={{ opacity: contentOpacity, transform: `translateY(${contentTranslate}px)`, transition: "opacity 360ms ease-out, transform 420ms ease-out" }}>
         <div className="text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.3em] text-accent">ABOUT START LINE</p>
           <h2 className="mt-3 text-4xl font-black tracking-tighter text-white sm:text-5xl lg:text-6xl">关于英创起点</h2>
         </div>
 
-        <div className="relative mt-14 -mx-1 flex snap-x snap-mandatory gap-9 overflow-x-auto px-1 [&>article]:w-[94%] [&>article]:shrink-0 [&>article]:snap-start md:mx-0 md:grid md:grid-cols-2 md:gap-14 md:overflow-visible md:px-0 md:[&>article]:w-auto md:[&>article]:shrink lg:grid-cols-3 lg:gap-16">
+        <div className="relative mt-6 flex flex-col gap-3 sm:mt-14 sm:-mx-1 sm:flex-row sm:snap-x sm:snap-mandatory sm:gap-9 sm:overflow-x-auto sm:px-1 sm:[&>article]:w-[94%] sm:[&>article]:shrink-0 sm:[&>article]:snap-start md:mx-0 md:grid md:grid-cols-2 md:gap-14 md:overflow-visible md:px-0 md:[&>article]:w-auto md:[&>article]:shrink lg:grid-cols-3 lg:gap-16">
           <article className="rounded-3xl border border-white/10 bg-white/[0.03] p-7 transition duration-300 hover:-translate-y-1 hover:border-accent/50 hover:shadow-[0_12px_30px_rgba(0,0,0,0.35)]">
             <h3 className="text-2xl font-bold text-white sm:text-3xl">外教+中教 双师授课</h3>
             <p className="mt-3 text-base leading-8 text-white/70 sm:text-lg">我们采用“外教搭中教”一起上课的模式。外教营造沉浸式英语环境，培养语感；中教辅助理解，确保知识吸收。</p>

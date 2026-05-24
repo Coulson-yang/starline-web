@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import type { InstitutionData } from "@/lib/institution-schema";
 
@@ -80,6 +81,7 @@ function ClassSchedulePopoverCard({
   teachers,
   live,
   showSeatDots,
+  onJumpToClass,
 }: {
   session: Session;
   sessions: Session[];
@@ -87,6 +89,7 @@ function ClassSchedulePopoverCard({
   teachers: InstitutionData["teachers"];
   live: boolean;
   showSeatDots: boolean;
+  onJumpToClass: (classId: string) => void;
 }) {
   const [open, setOpen] = useState(false);
   const wrapperRef = useRef<HTMLDivElement | null>(null);
@@ -154,6 +157,7 @@ function ClassSchedulePopoverCard({
         role="button"
         tabIndex={0}
         onClick={handleClick}
+        onDoubleClick={() => onJumpToClass(session.classId)}
         onKeyDown={(e) => {
           if (e.key === "Enter" || e.key === " ") {
             e.preventDefault();
@@ -217,6 +221,7 @@ function ScheduleMatrix({
   classes,
   teachers,
   showSeatDots,
+  onJumpToClass,
 }: {
   title: string;
   columns: ReadonlyArray<{ day: number; label: string }>;
@@ -226,6 +231,7 @@ function ScheduleMatrix({
   classes: InstitutionData["classes"];
   teachers: InstitutionData["teachers"];
   showSeatDots: boolean;
+  onJumpToClass: (classId: string) => void;
 }) {
   return (
     <section className="rounded-3xl border border-white/10 bg-white/[0.02] p-6">
@@ -267,6 +273,7 @@ function ScheduleMatrix({
                                 teachers={teachers}
                                 live={live}
                                 showSeatDots={showSeatDots}
+                                onJumpToClass={onJumpToClass}
                               />
                             );
                           })}
@@ -297,7 +304,12 @@ export function ManifestBoard({
   teachers: InstitutionData["teachers"];
   ageDistribution: InstitutionData["ageDistribution"];
 }) {
+  const router = useRouter();
   const now = useNowTicker();
+
+  const jumpToClassInfo = (classId: string) => {
+    router.push(`/fleet?classId=${encodeURIComponent(classId)}`);
+  };
   const liveId = useMemo(() => {
     const dow = now.getDay();
     const minutes = now.getHours() * 60 + now.getMinutes();
@@ -387,6 +399,7 @@ export function ManifestBoard({
           classes={classes}
           teachers={teachers}
           showSeatDots={false}
+          onJumpToClass={jumpToClassInfo}
         />
         <ScheduleMatrix
           title="周六 - 周日"
@@ -397,6 +410,7 @@ export function ManifestBoard({
           classes={classes}
           teachers={teachers}
           showSeatDots={true}
+          onJumpToClass={jumpToClassInfo}
         />
       </section>
     </div>

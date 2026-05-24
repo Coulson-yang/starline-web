@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import type { InstitutionData } from "@/lib/institution-schema";
 
 type GradeFilter = "all" | string;
@@ -129,6 +130,8 @@ export function FleetBoard({
   teachers: InstitutionData["teachers"];
   sessions: Session[];
 }) {
+  const searchParams = useSearchParams();
+  const targetClassId = searchParams.get("classId") ?? "";
   const [grade, setGrade] = useState<GradeFilter>("all");
 
   const teacherMap = useMemo(() => Object.fromEntries(teachers.map((t) => [t.id, t])), [teachers]);
@@ -144,6 +147,16 @@ export function FleetBoard({
     if (grade === "all") return visibleClasses;
     return visibleClasses.filter((item) => gradeText(item) === grade);
   }, [visibleClasses, grade]);
+
+  useEffect(() => {
+    if (!targetClassId) return;
+    const target = visibleClasses.find((item) => item.id === targetClassId);
+    if (!target) return;
+    const targetGrade = gradeText(target);
+    if (grade !== targetGrade) {
+      setGrade(targetGrade);
+    }
+  }, [targetClassId, visibleClasses, grade]);
 
   return (
     <div className="space-y-6">

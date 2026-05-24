@@ -542,7 +542,7 @@
       "gradeLabel": "一年级提高班",
       "material": "GW1",
       "capacity": 10,
-      "enrolled": 6,
+      "enrolled": 7,
       "teacherId": "t-liam",
       "teacherIds": ["t-liam", "t-camille"],
       "students": [
@@ -551,7 +551,8 @@
         { "alias": "Nico", "module": "Nico", "gender": "female" },
         { "alias": "Luna", "module": "Luna", "gender": "female" },
         { "alias": "Jason", "module": "Jason", "gender": "male" },
-        { "alias": "Nancy", "module": "Nancy", "gender": "female" }
+        { "alias": "Nancy", "module": "Nancy", "gender": "female" },
+        { "alias": "Melody", "module": "Melody", "gender": "female" }
       ]
     },
     {
@@ -576,7 +577,7 @@
       "id": "c-france",
       "name": "France班",
       "level": 1,
-      "gradeLabel": "4-6岁小龄班",
+      "gradeLabel": "小龄班",
       "material": "KB1",
       "capacity": 8,
       "enrolled": 7,
@@ -617,7 +618,7 @@
       "level": 4,
       "material": "GW3",
       "capacity": 10,
-      "enrolled": 9,
+      "enrolled": 10,
       "teacherId": "t-camille",
       "teacherIds": ["t-camille", "t-ava"],
       "students": [
@@ -629,7 +630,8 @@
         { "alias": "Charlie", "module": "Charlie", "gender": "male" },
         { "alias": "George", "module": "George", "gender": "male" },
         { "alias": "Chris", "module": "Chris", "gender": "male" },
-        { "alias": "Hazel", "module": "Hazel", "gender": "female" }
+        { "alias": "Hazel", "module": "Hazel", "gender": "female" },
+        { "alias": "king", "module": "king", "gender": "male" }
       ]
     },
     {
@@ -658,17 +660,19 @@
       "id": "c-spain",
       "name": "Spain班",
       "level": 1,
-      "gradeLabel": "2-4岁小龄班",
+      "gradeLabel": "小龄班",
       "material": "KBS",
       "capacity": 8,
-      "enrolled": 4,
+      "enrolled": 6,
       "teacherId": "t-ava",
       "teacherIds": ["t-ava", "t-mia"],
       "students": [
         { "alias": "Yuyu", "module": "Yuyu", "gender": "male" },
         { "alias": "Rayson", "module": "Rayson", "gender": "male" },
         { "alias": "Yoyo", "module": "Yoyo", "gender": "female" },
-        { "alias": "Anna", "module": "Anna", "gender": "female" }
+        { "alias": "Anna", "module": "Anna", "gender": "female" },
+        { "alias": "Jasper", "module": "Jasper", "gender": "male" },
+        { "alias": "Elsa", "module": "Elsa", "gender": "female" }
       ]
     },
     {
@@ -771,7 +775,7 @@
       "gradeLabel": "三升四年级班",
       "material": "GW1",
       "capacity": 10,
-      "enrolled": 7,
+      "enrolled": 9,
       "teacherId": "t-liam",
       "teacherIds": ["t-liam", "t-mia"],
       "students": [
@@ -781,7 +785,9 @@
         { "alias": "Jessy", "module": "Jessy", "gender": "male" },
         { "alias": "Jasper", "module": "Jasper", "gender": "male" },
         { "alias": "Bruce", "module": "Bruce", "gender": "male" },
-        { "alias": "Lucas", "module": "Lucas", "gender": "male" }
+        { "alias": "Lucas", "module": "Lucas", "gender": "male" },
+        { "alias": "Curry", "module": "Curry", "gender": "male" },
+        { "alias": "Mia", "module": "Mia", "gender": "female" }
       ]
     },
     {

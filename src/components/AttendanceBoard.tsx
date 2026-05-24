@@ -22,7 +22,7 @@ type AttendanceStore = {
 const STORAGE_KEY = "starline_class_data_v2";
 const LEGACY_STORAGE_KEY = "attendance-board-v1";
 const AUTH_CODE = "8888";
-const COLUMN_COUNT = 36;
+const COLUMN_COUNT = 39;
 const TEACHER_MARKS = ["R", "C", "S", "D"] as const;
 const hiddenClassIds = new Set(["c-orion", "c-luna", "c-atlas", "c-nova"]);
 const SHEET_OPTIONS = [1, 2, 3, 4, 5] as const;
@@ -471,7 +471,11 @@ export function AttendanceBoard({ classes }: { classes: ClassItem[] }) {
                     onMouseEnter={() => setHoverCol(colIdx)}
                     onMouseLeave={() => setHoverCol(null)}
                   >
-                    <div className="relative mx-auto flex h-16 w-16 flex-col items-center justify-center rounded-md border border-white/15 bg-white/5 px-1 py-1 text-center">
+                    <div
+                      className={`relative mx-auto flex h-16 w-16 flex-col items-center justify-center rounded-md border bg-white/5 px-1 py-1 text-center ${
+                        colIdx >= COLUMN_COUNT - 3 ? "border-accent" : "border-white/15"
+                      }`}
+                    >
                       <button
                         type="button"
                         onClick={() => cycleTeacherMark(colIdx)}
