@@ -82,7 +82,7 @@ export function ClassroomTypesCarousel() {
               <Image src={item.imageUrl} alt={item.title} fill className="scale-[1.06] object-cover object-center" sizes="94vw" />
               <div className="absolute inset-0 bg-gradient-to-b from-[#020712]/72 via-[#071225]/50 to-[#020712]/75" />
               <div className="absolute inset-0 flex items-center justify-center p-6 text-center">
-                <div className="pointer-events-none absolute left-1/2 top-1/2 h-[78vw] w-[78vw] max-h-[520px] max-w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#020712]/58 blur-2xl" />
+                <div className="pointer-events-none absolute left-1/2 top-1/2 h-[86vw] w-[86vw] max-h-[620px] max-w-[620px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#020712]/78 blur-3xl" />
                 <div className="relative z-10 max-w-2xl space-y-3">
                   <h3 className="text-4xl font-black tracking-[0.04em] text-white">{item.title}</h3>
                   <p className="text-sm font-semibold text-accent">{item.subtitle}</p>

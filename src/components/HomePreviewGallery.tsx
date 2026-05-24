@@ -30,9 +30,9 @@ export function HomePreviewGallery({ items }: { items: GalleryItem[] }) {
   return (
     <section className="mx-auto w-full max-w-none px-0">
       <div className="relative h-screen overflow-hidden bg-white/[0.04] sm:rounded-none">
-        <div className="-mx-1 flex h-full snap-x snap-mandatory gap-0 overflow-x-auto px-0 lg:hidden">
+        <div className="-mx-1 flex h-full snap-x snap-mandatory items-center gap-3 overflow-x-auto px-1 lg:hidden">
           {items.map((item) => (
-            <figure key={`mobile-${item.id}`} className="relative h-full w-full shrink-0 snap-start overflow-hidden rounded-none">
+            <figure key={`mobile-${item.id}`} className="relative aspect-[16/10] w-[94%] shrink-0 snap-start overflow-hidden rounded-2xl">
               <Image src={item.imageUrl} alt={item.caption} fill className="scale-[1.03] object-cover object-center" sizes="94vw" onError={onImgError} />
               <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[#020712]/75 to-transparent" />
               <figcaption className="absolute inset-x-0 bottom-0 bg-black/45 p-4 text-center">
