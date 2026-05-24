@@ -55,7 +55,14 @@ export default async function HomePage() {
         <div className="absolute inset-0 bg-gradient-to-b from-deepSpace/85 via-deepSpace/45 to-transparent" />
       </section>
 
-      <StatsHeroSection stats={data.liveStats} />
+      <StatsHeroSection
+        stats={data.liveStats.map((stat) => ({
+          ...stat,
+          value: typeof stat.value === "number" ? stat.value : Number(stat.value) || 0,
+          suffix: stat.suffix ?? "",
+          hint: stat.hint ?? "",
+        }))}
+      />
 
       <AboutHeroSection />
 
