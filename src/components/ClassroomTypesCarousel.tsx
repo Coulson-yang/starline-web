@@ -69,104 +69,69 @@ const classroomTypes: ClassroomType[] = [
 ];
 
 export function ClassroomTypesCarousel() {
-  const [start, setStart] = useState(0);
-  const maxStart = Math.max(0, classroomTypes.length - 2);
-  const visible = useMemo(() => classroomTypes.slice(start, start + 2), [start]);
+  const [index, setIndex] = useState(0);
+  const maxIndex = classroomTypes.length - 1;
+  const current = useMemo(() => classroomTypes[index] ?? classroomTypes[0], [index]);
 
   return (
-    <section className="mx-auto mt-16 max-w-6xl px-4">
-      <div className="flex items-end justify-between gap-3">
-        <div className="space-y-3">
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-accent">CLASSROOM TYPES</p>
-          <h2 className="text-3xl font-black tracking-tighter text-white sm:text-4xl">课堂类型</h2>
-          <p className="max-w-3xl text-sm text-white/65">展示英创起点丰富课堂形态，当前每次展示两种课堂，可通过左右按钮切换预览。</p>
-        </div>
-
-        <div className="hidden items-center gap-2 md:flex">
-          <button
-            type="button"
-            onClick={() => setStart((prev) => Math.max(0, prev - 1))}
-            disabled={start === 0}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/5 text-lg text-white transition hover:border-accent/60 hover:text-accent disabled:cursor-not-allowed disabled:opacity-40"
-            aria-label="查看上一组课堂类型"
-          >
-            ←
-          </button>
-          <button
-            type="button"
-            onClick={() => setStart((prev) => Math.min(maxStart, prev + 1))}
-            disabled={start >= maxStart}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/5 text-lg text-white transition hover:border-accent/60 hover:text-accent disabled:cursor-not-allowed disabled:opacity-40"
-            aria-label="查看下一组课堂类型"
-          >
-            →
-          </button>
-        </div>
-      </div>
-
-      <div className="relative mt-6 md:hidden">
-        <div className="-mx-1 flex snap-x snap-mandatory gap-4 overflow-x-auto px-1">
+    <section className="relative isolate h-screen w-full overflow-hidden">
+      <div className="relative h-full w-full md:hidden">
+        <div className="-mx-1 flex h-full snap-x snap-mandatory items-center gap-4 overflow-x-auto px-1">
           {classroomTypes.map((item) => (
-            <article key={`mobile-${item.id}`} className="w-[88%] shrink-0 snap-start overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03]">
-              <div className="relative h-64 w-full">
-                <Image src={item.imageUrl} alt={item.title} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
-              </div>
-              <div className="space-y-3 p-6">
-                <h3 className="text-2xl font-black text-white">{item.title}</h3>
-                <p className="text-sm font-semibold text-accent">{item.subtitle}</p>
-                <p className="text-sm text-white/80">
-                  <span className="font-semibold text-white">上课方式：</span>
-                  {item.teachingMode}
-                </p>
-                <p className="text-sm text-white/75">
-                  <span className="font-semibold text-white">课堂内容：</span>
-                  {item.content}
-                </p>
-                <p className="text-sm text-white/75">
-                  <span className="font-semibold text-white">词汇学习：</span>
-                  {item.vocab}
-                </p>
-                <p className="rounded-xl border border-accent/40 bg-accent/10 px-3 py-2 text-sm text-white/90">
-                  <span className="font-semibold text-accent">核心亮点：</span>
-                  {item.highlight}
-                </p>
+            <article key={`mobile-${item.id}`} className="relative h-[88vh] w-[94%] shrink-0 snap-start overflow-hidden rounded-3xl border border-white/10">
+              <Image src={item.imageUrl} alt={item.title} fill className="scale-[1.06] object-cover object-center" sizes="94vw" />
+              <div className="absolute inset-0 bg-gradient-to-b from-[#020712]/72 via-[#071225]/50 to-[#020712]/75" />
+              <div className="absolute inset-0 flex items-center justify-center p-6 text-center">
+                <div className="pointer-events-none absolute left-1/2 top-1/2 h-[78vw] w-[78vw] max-h-[520px] max-w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#020712]/58 blur-2xl" />
+                <div className="relative z-10 max-w-2xl space-y-3">
+                  <h3 className="text-4xl font-black tracking-[0.04em] text-white">{item.title}</h3>
+                  <p className="text-sm font-semibold text-accent">{item.subtitle}</p>
+                  <p className="text-sm leading-7 text-white/80">{item.teachingMode}</p>
+                  <p className="text-sm leading-7 text-white/80">{item.content}</p>
+                  <p className="text-sm leading-7 text-white/80">{item.vocab}</p>
+                  <p className="text-sm leading-7 text-white/90">{item.highlight}</p>
+                </div>
               </div>
             </article>
           ))}
         </div>
-        <div className="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-deepSpace/90 to-transparent" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-deepSpace/90 to-transparent" />
-        <p className="mt-3 text-center text-[11px] text-white/45">左右滑动查看更多</p>
+        <p className="absolute bottom-4 left-1/2 -translate-x-1/2 text-center text-[11px] text-white/55">左右滑动查看更多课堂类型</p>
       </div>
 
-      <div className="mt-6 hidden gap-4 md:grid md:grid-cols-2">
-        {visible.map((item) => (
-          <article key={`desktop-${item.id}`} className="overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03]">
-            <div className="relative h-64 w-full">
-              <Image src={item.imageUrl} alt={item.title} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
-            </div>
-            <div className="space-y-3 p-6">
-              <h3 className="text-2xl font-black text-white">{item.title}</h3>
-              <p className="text-sm font-semibold text-accent">{item.subtitle}</p>
-              <p className="text-sm text-white/80">
-                <span className="font-semibold text-white">上课方式：</span>
-                {item.teachingMode}
-              </p>
-              <p className="text-sm text-white/75">
-                <span className="font-semibold text-white">课堂内容：</span>
-                {item.content}
-              </p>
-              <p className="text-sm text-white/75">
-                <span className="font-semibold text-white">词汇学习：</span>
-                {item.vocab}
-              </p>
-              <p className="rounded-xl border border-accent/40 bg-accent/10 px-3 py-2 text-sm text-white/90">
-                <span className="font-semibold text-accent">核心亮点：</span>
-                {item.highlight}
-              </p>
-            </div>
-          </article>
-        ))}
+      <div className="relative hidden h-full w-full md:block">
+        <Image src={current.imageUrl} alt={current.title} fill className="scale-[1.06] object-cover object-center" sizes="100vw" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#020712]/72 via-[#071225]/50 to-[#020712]/75" />
+
+        <button
+          type="button"
+          onClick={() => setIndex((prev) => Math.max(0, prev - 1))}
+          disabled={index === 0}
+          className="absolute left-6 top-1/2 z-20 inline-flex h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full border border-white/45 bg-deepSpace/55 text-3xl text-white shadow-[0_10px_30px_rgba(0,0,0,0.45)] backdrop-blur transition hover:border-accent hover:text-accent disabled:cursor-not-allowed disabled:opacity-35"
+          aria-label="查看上一种课堂类型"
+        >
+          ‹
+        </button>
+        <button
+          type="button"
+          onClick={() => setIndex((prev) => Math.min(maxIndex, prev + 1))}
+          disabled={index >= maxIndex}
+          className="absolute right-6 top-1/2 z-20 inline-flex h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full border border-white/45 bg-deepSpace/55 text-3xl text-white shadow-[0_10px_30px_rgba(0,0,0,0.45)] backdrop-blur transition hover:border-accent hover:text-accent disabled:cursor-not-allowed disabled:opacity-35"
+          aria-label="查看下一种课堂类型"
+        >
+          ›
+        </button>
+
+        <div className="absolute inset-0 z-10 flex items-center justify-center p-8 text-center">
+          <div className="pointer-events-none absolute left-1/2 top-1/2 h-[68vw] w-[68vw] max-h-[640px] max-w-[640px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#020712]/60 blur-3xl" />
+          <div className="relative z-10 max-w-3xl space-y-4">
+            <h2 className="text-5xl font-black tracking-[0.05em] text-white">{current.title}</h2>
+            <p className="text-lg font-semibold text-accent">{current.subtitle}</p>
+            <p className="text-base leading-8 text-white/82">{current.teachingMode}</p>
+            <p className="text-base leading-8 text-white/82">{current.content}</p>
+            <p className="text-base leading-8 text-white/82">{current.vocab}</p>
+            <p className="text-base leading-8 text-white/92">{current.highlight}</p>
+          </div>
+        </div>
       </div>
     </section>
   );

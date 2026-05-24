@@ -28,17 +28,14 @@ export function HomePreviewGallery({ items }: { items: GalleryItem[] }) {
   if (!items?.length || !current) return null;
 
   return (
-    <section className="mx-auto mt-16 max-w-6xl px-4">
-      <div className="flex items-center justify-between gap-3">
-        <h2 className="text-2xl font-black tracking-tight text-white sm:text-3xl">校区风貌</h2>
-      </div>
-
-      <div className="relative mt-5 overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04]">
-        <div className="-mx-1 flex snap-x snap-mandatory gap-3 overflow-x-auto px-1 sm:hidden">
+    <section className="mx-auto w-full max-w-none px-0">
+      <div className="relative h-screen overflow-hidden bg-white/[0.04] sm:rounded-none">
+        <div className="-mx-1 flex h-full snap-x snap-mandatory items-center gap-3 overflow-x-auto px-1 lg:hidden">
           {items.map((item) => (
-            <figure key={`mobile-${item.id}`} className="relative aspect-video w-[92%] shrink-0 snap-start overflow-hidden rounded-2xl">
-              <Image src={item.imageUrl} alt={item.caption} fill className="object-cover" sizes="92vw" onError={onImgError} />
-              <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-deepSpace/90 via-deepSpace/35 to-transparent p-4">
+            <figure key={`mobile-${item.id}`} className="relative aspect-[16/10] w-[94%] shrink-0 snap-start overflow-hidden rounded-2xl">
+              <Image src={item.imageUrl} alt={item.caption} fill className="scale-[1.03] object-cover object-center" sizes="94vw" onError={onImgError} />
+              <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[#020712]/75 to-transparent" />
+              <figcaption className="absolute inset-x-0 bottom-0 bg-black/45 p-4 text-center">
                 <p className="text-base font-semibold text-white">{item.caption}</p>
                 <p className="mt-1 text-sm font-semibold text-accent">{captionEnMap[item.id] ?? item.caption}</p>
               </figcaption>
@@ -46,21 +43,22 @@ export function HomePreviewGallery({ items }: { items: GalleryItem[] }) {
           ))}
         </div>
 
-        <div className="relative hidden aspect-video w-full sm:block">
+        <div className="relative hidden h-full w-full lg:block">
           <Image
             src={current.imageUrl}
             alt={current.caption}
             fill
-            className="object-cover"
-            sizes="(max-width: 1200px) 100vw, 1200px"
+            className="scale-[1.06] object-cover object-center"
+            sizes="100vw"
             onError={onImgError}
           />
+          <div className="absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-[#020712]/82 via-[#071225]/45 to-transparent" />
 
           <button
             type="button"
             onClick={() => setIndex((prev) => Math.max(0, prev - 1))}
             disabled={index === 0}
-            className="absolute left-4 top-1/2 z-10 inline-flex h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full border border-white/35 bg-deepSpace/60 text-3xl text-white transition hover:border-accent hover:text-accent disabled:cursor-not-allowed disabled:opacity-35"
+            className="absolute left-6 top-1/2 z-20 inline-flex h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full border border-white/45 bg-deepSpace/55 text-3xl text-white shadow-[0_10px_30px_rgba(0,0,0,0.45)] backdrop-blur transition hover:border-accent hover:text-accent disabled:cursor-not-allowed disabled:opacity-35"
             aria-label="查看上一张图片"
           >
             ‹
@@ -70,15 +68,15 @@ export function HomePreviewGallery({ items }: { items: GalleryItem[] }) {
             type="button"
             onClick={() => setIndex((prev) => Math.min(maxIndex, prev + 1))}
             disabled={index >= maxIndex}
-            className="absolute right-4 top-1/2 z-10 inline-flex h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full border border-white/35 bg-deepSpace/60 text-3xl text-white transition hover:border-accent hover:text-accent disabled:cursor-not-allowed disabled:opacity-35"
+            className="absolute right-6 top-1/2 z-20 inline-flex h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full border border-white/45 bg-deepSpace/55 text-3xl text-white shadow-[0_10px_30px_rgba(0,0,0,0.45)] backdrop-blur transition hover:border-accent hover:text-accent disabled:cursor-not-allowed disabled:opacity-35"
             aria-label="查看下一张图片"
           >
             ›
           </button>
 
-          <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-deepSpace/90 via-deepSpace/35 to-transparent p-5 sm:p-6">
-            <p className="text-lg font-semibold text-white sm:text-xl">{current.caption}</p>
-            <p className="mt-1 text-base font-semibold text-accent sm:text-lg">{captionEnMap[current.id] ?? current.caption}</p>
+          <div className="absolute inset-x-0 bottom-0 z-20 bg-black/45 p-6 text-center sm:p-8">
+            <p className="text-2xl font-semibold text-white sm:text-3xl">{current.caption}</p>
+            <p className="mt-2 text-lg font-semibold text-accent sm:text-2xl">{captionEnMap[current.id] ?? current.caption}</p>
           </div>
         </div>
       </div>

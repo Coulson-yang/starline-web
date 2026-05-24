@@ -1,10 +1,12 @@
 import Image from "next/image";
 import { MissionNavCard } from "@/components/MissionNavCard";
 import { TelemetryStat } from "@/components/TelemetryStat";
+import { StatsHeroSection } from "@/components/StatsHeroSection";
 import { GhostButton } from "@/components/ui/GhostButton";
 import { HomePreviewGallery } from "@/components/HomePreviewGallery";
 import { ClassroomTypesCarousel } from "@/components/ClassroomTypesCarousel";
 import { HeroVideoBackground } from "@/components/HeroVideoBackground";
+import { AboutHeroSection } from "@/components/AboutHeroSection";
 import { getInstitutionData } from "@/lib/get-institution-data";
 
 export default async function HomePage() {
@@ -28,6 +30,15 @@ export default async function HomePage() {
             <p className="text-xs font-semibold uppercase tracking-[0.35em] text-accent">英创起点 Start Line.</p>
             <h1 className="text-4xl font-black leading-tight tracking-tighter text-white sm:text-5xl lg:text-6xl">{data.brand.tagline}</h1>
             <p className="text-lg text-white/80">专注3-16岁英语启蒙，搭建语言体系，开发语言思维，让孩子自信开口！</p>
+            <p
+              className="-mt-2 max-w-xl text-xs font-medium uppercase leading-7 tracking-[0.08em] text-white/65 sm:text-sm sm:leading-8"
+              style={{ fontFamily: "'Times New Roman', Times, serif" }}
+            >
+              Focused on English growth for ages 3–16, we build strong language systems, shape critical thinking, and help every learner speak with confidence.
+              <span className="ml-2 inline-flex align-middle">
+                <Image src="/images/brand-logo.png" alt="Brand Logo" width={28} height={28} className="object-contain" />
+              </span>
+            </p>
             <div className="flex flex-wrap gap-3">
               <GhostButton href={data.brand.trialCtaHref} variant="accent">
                 {data.brand.trialCtaLabel}
@@ -40,77 +51,17 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="mx-auto -mt-12 max-w-6xl px-4 sm:-mt-16">
-        <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-4 backdrop-blur sm:p-6">
-          <div className="relative">
-            <div className="-mx-1 flex snap-x snap-mandatory gap-3 overflow-x-auto px-1 sm:mx-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:overflow-visible sm:px-0">
-              {data.liveStats.map((stat) => (
-                <div key={stat.id} className="w-[84%] shrink-0 snap-start sm:w-auto sm:shrink sm:snap-none">
-                  <TelemetryStat label={stat.label} value={stat.value} suffix={stat.suffix} hint={stat.hint} />
-                </div>
-              ))}
-            </div>
-            <div className="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-deepSpace/90 to-transparent sm:hidden" />
-            <div className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-deepSpace/90 to-transparent sm:hidden" />
-          </div>
-          <p className="mt-3 text-center text-[11px] text-white/45 sm:hidden">左右滑动查看更多</p>
-        </div>
+      <section className="relative h-16 sm:h-20 lg:h-24">
+        <div className="absolute inset-0 bg-gradient-to-b from-deepSpace/85 via-deepSpace/45 to-transparent" />
       </section>
 
-      <HomePreviewGallery items={data.gallery} />
+      <StatsHeroSection stats={data.liveStats} />
 
-      <section className="mx-auto mt-16 max-w-6xl px-4">
-        <div className="space-y-3">
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-accent">ABOUT START LINE</p>
-          <h2 className="text-3xl font-black tracking-tighter text-white sm:text-4xl">关于英创起点</h2>
-        </div>
-
-        <div className="relative mt-6">
-          <div className="-mx-1 flex snap-x snap-mandatory gap-4 overflow-x-auto px-1 [&>article]:w-[92%] [&>article]:shrink-0 [&>article]:snap-start md:mx-0 md:grid md:grid-cols-2 md:gap-4 md:overflow-visible md:px-0 md:[&>article]:w-auto md:[&>article]:shrink lg:grid-cols-3">
-          <article className="rounded-3xl border border-white/10 bg-white/[0.03] p-5 transition duration-300 hover:-translate-y-1 hover:border-accent/50 hover:shadow-[0_12px_30px_rgba(0,0,0,0.35)]">
-            <div className="mb-4 inline-flex rounded-2xl border border-white/15 bg-deepSpace/70 p-3 text-accent">
-              <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                <circle cx="8.5" cy="7" r="4" />
-                <path d="M24 21v-2a4 4 0 0 0-3-3.87" />
-                <path d="M18 3.1a4 4 0 0 1 0 7.8" />
-              </svg>
-            </div>
-            <h3 className="text-xl font-bold text-white">外教+中教 双师授课</h3>
-            <p className="mt-2 text-sm leading-6 text-white/70">我们采用“外教搭中教”一起上课的模式。外教营造沉浸式英语环境，培养语感；中教辅助理解，确保知识吸收。</p>
-          </article>
-
-          <article className="rounded-3xl border border-white/10 bg-white/[0.03] p-5 transition duration-300 hover:-translate-y-1 hover:border-accent/50 hover:shadow-[0_12px_30px_rgba(0,0,0,0.35)]">
-            <div className="mb-4 inline-flex rounded-2xl border border-white/15 bg-deepSpace/70 p-3 text-accent">
-              <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <path d="M12 3c-3.8 0-7 2.9-7 6.5 0 2 1 3.7 2.5 4.9V18l3.2-1.9c.4.1.9.2 1.3.2 3.8 0 7-2.9 7-6.5S15.8 3 12 3Z" />
-                <path d="M9 9.2c.6-1 1.7-1.7 3-1.7 1.9 0 3.4 1.3 3.4 3 0 2.2-2.4 2.7-2.4 4" />
-                <circle cx="13" cy="17.3" r=".7" fill="currentColor" stroke="none" />
-              </svg>
-            </div>
-            <h3 className="text-xl font-bold text-white">开发语言思维</h3>
-            <p className="mt-2 text-sm leading-6 text-white/70">注重培养兴趣，不仅提高听说读写能力，更致力于搭建完整的语言体系，开发孩子的英语逻辑思维。</p>
-          </article>
-
-          <article className="rounded-3xl border border-white/10 bg-white/[0.03] p-5 transition duration-300 hover:-translate-y-1 hover:border-accent/50 hover:shadow-[0_12px_30px_rgba(0,0,0,0.35)]">
-            <div className="mb-4 inline-flex rounded-2xl border border-white/15 bg-deepSpace/70 p-3 text-accent">
-              <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21V5.5Z" />
-                <path d="M4 6h11" />
-                <path d="M12 3v16" />
-              </svg>
-            </div>
-            <h3 className="text-xl font-bold text-white">剑桥原版教材</h3>
-            <p className="mt-2 text-sm leading-6 text-white/70">使用剑桥原版教材 Kid&apos;s Box 和 Guess What!，内容生动有趣，接轨国际标准，拓宽国际视野。</p>
-          </article>
-          </div>
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-deepSpace/90 to-transparent md:hidden" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-deepSpace/90 to-transparent md:hidden" />
-          <p className="mt-3 text-center text-[11px] text-white/45 md:hidden">左右滑动查看更多</p>
-        </div>
-      </section>
+      <AboutHeroSection />
 
       <ClassroomTypesCarousel />
+
+      <HomePreviewGallery items={data.gallery} />
 
       <section className="mx-auto mt-16 max-w-6xl px-4">
         <div className="space-y-3">
@@ -304,7 +255,7 @@ export default async function HomePage() {
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-accent">AGENCY DETAILS</p>
             <h2 className="text-3xl font-black tracking-tighter text-white sm:text-4xl">课堂动态</h2>
-            <p className="mt-2 max-w-2xl text-sm text-white/65">四张巨幅卡片对应收费、排期、舰队与乘员技术栈，移动端单列浏览同样清晰。</p>
+
           </div>
         </div>
         <div className="mt-8 grid gap-4 md:grid-cols-2">
