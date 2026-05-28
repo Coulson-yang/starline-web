@@ -27,6 +27,14 @@ const TEACHER_MARKS = ["R", "C", "S", "D"] as const;
 const hiddenClassIds = new Set(["c-orion", "c-luna", "c-atlas", "c-nova"]);
 const SHEET_OPTIONS = [1, 2, 3, 4, 5] as const;
 
+const FRANCE_SHEET2_FIXED_DATES = [
+  "12-10", "12-14", "12-17", "12-21", "12-24", "12-28",
+  "01-07", "01-11", "01-14",
+  "03-04", "03-08", "03-11", "03-15", "03-18", "03-22", "03-25", "03-29",
+  "04-01", "04-08", "04-12", "04-15", "04-19", "04-22", "04-26", "04-29",
+  "05-06", "05-10", "05-13", "05-17", "05-20", "05-24",
+] as const;
+
 function md(date: Date) {
   const month = `${date.getMonth() + 1}`.padStart(2, "0");
   const day = `${date.getDate()}`.padStart(2, "0");
@@ -196,6 +204,25 @@ export function AttendanceBoard({ classes }: { classes: ClassItem[] }) {
     try {
       const parsed = JSON.parse(raw) as AttendanceStore;
       if (!selectedClassId) return;
+
+      const isFranceSheet2 = selectedClassId === "c-france" && selectedSheet === 2;
+      if (isFranceSheet2) {
+        const fixedDates = [...FRANCE_SHEET2_FIXED_DATES, ...Array.from({ length: Math.max(0, COLUMN_COUNT - FRANCE_SHEET2_FIXED_DATES.length) }, () => "")];
+        const fixedStatusMap: Record<string, AttendanceStatus> = {};
+        FRANCE_SHEET2_FIXED_DATES.forEach((_, idx) => {
+          fixedStatusMap[`Yaoyao__${idx}`] = "active";
+        });
+
+        setDates(fixedDates);
+        setTeacherMarks(parsed.teacherMarksByClass?.[selectedSheetKey] ?? Array.from({ length: COLUMN_COUNT }, () => "R"));
+        setStatusMap(fixedStatusMap);
+
+        parsed.datesByClass[selectedSheetKey] = fixedDates;
+        parsed.statusByClass[selectedSheetKey] = fixedStatusMap;
+        window.localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
+        return;
+      }
+
       setDates(parsed.datesByClass[selectedSheetKey] ?? (isSheetOne ? defaultDates() : emptyDates()));
       setTeacherMarks(parsed.teacherMarksByClass?.[selectedSheetKey] ?? Array.from({ length: COLUMN_COUNT }, () => "R"));
       setStatusMap(parsed.statusByClass[selectedSheetKey] ?? {});
@@ -203,22 +230,34 @@ export function AttendanceBoard({ classes }: { classes: ClassItem[] }) {
       setDates(isSheetOne ? defaultDates() : emptyDates());
       setStatusMap({});
     }
-  }, [selectedClassId, selectedSheetKey, isSheetOne]);
+  }, [selectedClassId, selectedSheet, selectedSheetKey, isSheetOne]);
 
   useEffect(() => {
     if (!selectedClassId) return;
     const currentClass = classOptions.find((c) => c.id === selectedClassId);
 
+    const isFranceSheet2 = selectedClassId === "c-france" && selectedSheet === 2;
+    const forceDates = isFranceSheet2 ? [...FRANCE_SHEET2_FIXED_DATES, ...Array.from({ length: Math.max(0, COLUMN_COUNT - FRANCE_SHEET2_FIXED_DATES.length) }, () => "")] : dates;
+    const forceStatusMap = (() => {
+      if (!isFranceSheet2) return statusMap;
+      const next: Record<string, AttendanceStatus> = {};
+      FRANCE_SHEET2_FIXED_DATES.forEach((_, idx) => {
+        next[`Yaoyao__${idx}`] = "active";
+      });
+      return next;
+    })();
+
     handleSave((current) => {
-      current.datesByClass[selectedSheetKey] = dates;
+      current.datesByClass[selectedSheetKey] = forceDates;
       current.teacherMarksByClass[selectedSheetKey] = teacherMarks;
-      current.statusByClass[selectedSheetKey] = statusMap;
+      current.statusByClass[selectedSheetKey] = forceStatusMap;
       current.classesMeta[selectedSheetKey] = {
         className: currentClass ? `${classDisplayName(currentClass.name)} · 表${selectedSheet}` : selectedClassId,
         students: currentClass ? currentClass.students.map((s) => s.alias) : [],
       };
       return current;
     });
+
   }, [dates, teacherMarks, statusMap, selectedClassId, selectedSheetKey, selectedSheet, classOptions, handleSave]);
 
   useEffect(() => {
