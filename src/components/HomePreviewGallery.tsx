@@ -29,7 +29,7 @@ export function HomePreviewGallery({ items }: { items: GalleryItem[] }) {
 
   return (
     <section className="mx-auto w-full max-w-none px-0">
-      <div className="relative h-screen overflow-hidden bg-white/[0.04] sm:rounded-none">
+      <div className="relative h-auto overflow-hidden bg-white/[0.04] sm:rounded-none lg:h-screen">
         <div className="-mx-1 flex h-full snap-x snap-mandatory items-center gap-3 overflow-x-auto px-1 lg:hidden">
           {items.map((item) => (
             <figure key={`mobile-${item.id}`} className="relative aspect-[16/10] w-[94%] shrink-0 snap-start overflow-hidden rounded-2xl">
