@@ -55,6 +55,10 @@ function findSessionsForCell(sessions: Session[], dayOfWeek: number, slot: TimeS
   return sessions.filter((session) => session.dayOfWeek === dayOfWeek && isSessionInSlot(session, slot));
 }
 
+function shouldHideEmptySlot(dayOfWeek: number, slot: TimeSlot, sessions: Session[]) {
+  return slot.id === "wd-3" && (dayOfWeek === 3 || dayOfWeek === 4) && sessions.length === 0;
+}
+
 function classDisplayTitle(session: Session) {
   return session.title.replace(/班$/, "");
 }
@@ -81,6 +85,7 @@ function ClassSchedulePopoverCard({
   teachers,
   live,
   showSeatDots,
+  density = "compact",
   onJumpToClass,
 }: {
   session: Session;
@@ -89,6 +94,7 @@ function ClassSchedulePopoverCard({
   teachers: InstitutionData["teachers"];
   live: boolean;
   showSeatDots: boolean;
+  density?: "compact" | "relaxed";
   onJumpToClass: (classId: string) => void;
 }) {
   const [open, setOpen] = useState(false);
@@ -151,6 +157,13 @@ function ClassSchedulePopoverCard({
     setOpen(true);
   };
 
+  const cardClass =
+    density === "relaxed"
+      ? "cursor-pointer rounded-2xl border border-white/10 bg-deepSpace/70 p-3.5 text-xs text-white/80 transition duration-300 hover:-translate-y-0.5 hover:border-accent/50 hover:shadow-[0_10px_26px_rgba(0,0,0,0.35)]"
+      : "cursor-pointer rounded-xl border border-white/10 bg-deepSpace/70 p-1 text-[10px] text-white/80 transition duration-300 hover:-translate-y-0.5 hover:border-accent/50 hover:shadow-[0_10px_26px_rgba(0,0,0,0.35)] sm:p-3 sm:text-xs";
+  const titleClass = density === "relaxed" ? "text-sm font-semibold leading-5 text-white" : "text-[11px] font-semibold leading-4 text-white md:text-xs";
+  const teacherClass = density === "relaxed" ? "mt-1.5 text-xs leading-5 text-white/60" : "mt-1.5 text-[10px] leading-4 text-white/60 md:mt-2 md:text-[11px]";
+
   return (
     <div ref={wrapperRef} className="relative" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       <div
@@ -164,15 +177,15 @@ function ClassSchedulePopoverCard({
             handleClick();
           }
         }}
-        className="cursor-pointer rounded-xl border border-white/10 bg-deepSpace/70 p-1 text-[10px] text-white/80 transition duration-300 hover:-translate-y-0.5 hover:border-accent/50 hover:shadow-[0_10px_26px_rgba(0,0,0,0.35)] sm:p-3 sm:text-xs"
+        className={cardClass}
       >
         <div className="flex items-start justify-between gap-2 md:gap-3">
           <div className="min-w-0">
             <div className="flex items-center gap-1.5 md:gap-2">
-              <span className="text-[11px] font-semibold leading-4 text-white md:text-xs">{classDisplayTitle(session)}</span>
+              <span className={titleClass}>{classDisplayTitle(session)}</span>
               {live ? <span className="rounded-full bg-accent px-1.5 py-0.5 text-[9px] font-bold text-white md:px-2 md:text-[10px]">LIVE</span> : null}
             </div>
-            <p className="mt-1.5 text-[10px] leading-4 text-white/60 md:mt-2 md:text-[11px]">{teacherText || "待排教师"}</p>
+            <p className={teacherClass}>{teacherText || "待排教师"}</p>
           </div>
           {showSeatDots ? (
             <div className="hidden grid-cols-5 gap-1.5 pt-0.5 md:grid" aria-label="班级人数圆点">
@@ -212,6 +225,75 @@ function ClassSchedulePopoverCard({
   );
 }
 
+function MobileScheduleList({
+  columns,
+  slots,
+  sessions,
+  liveId,
+  classes,
+  teachers,
+  showSeatDots,
+  onJumpToClass,
+}: {
+  columns: ReadonlyArray<{ day: number; label: string }>;
+  slots: TimeSlot[];
+  sessions: Session[];
+  liveId: string | null;
+  classes: InstitutionData["classes"];
+  teachers: InstitutionData["teachers"];
+  showSeatDots: boolean;
+  onJumpToClass: (classId: string) => void;
+}) {
+  return (
+    <div className="mt-4 space-y-4 sm:hidden">
+      {columns.map((column) => (
+        <article key={column.day} className="rounded-2xl border border-white/10 bg-deepSpace/45 p-3.5">
+          <div className="flex items-center justify-between border-b border-white/10 pb-3">
+            <h4 className="text-base font-bold text-white">{column.label}</h4>
+            <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">Schedule</span>
+          </div>
+
+          <div className="mt-3 space-y-3">
+            {slots.map((slot) => {
+              const cellSessions = findSessionsForCell(sessions, column.day, slot);
+              if (shouldHideEmptySlot(column.day, slot, cellSessions)) return null;
+
+              return (
+                <div key={`${column.day}-${slot.id}`} className="rounded-2xl border border-white/10 bg-white/[0.03] p-3">
+                  <div className="mb-2.5 flex items-center justify-between gap-3">
+                    <span className="text-sm font-semibold text-white/90">{slot.label}</span>
+                    <span className="h-px flex-1 bg-white/10" aria-hidden="true" />
+                  </div>
+
+                  {cellSessions.length ? (
+                    <div className="space-y-2.5">
+                      {cellSessions.map((session) => (
+                        <ClassSchedulePopoverCard
+                          key={session.id}
+                          session={session}
+                          sessions={sessions}
+                          classes={classes}
+                          teachers={teachers}
+                          live={session.id === liveId}
+                          showSeatDots={showSeatDots}
+                          density="relaxed"
+                          onJumpToClass={onJumpToClass}
+                        />
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="rounded-xl border border-dashed border-white/10 px-3 py-4 text-center text-xs text-white/35">无排期</p>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </article>
+      ))}
+    </div>
+  );
+}
+
 function ScheduleMatrix({
   title,
   columns,
@@ -234,9 +316,19 @@ function ScheduleMatrix({
   onJumpToClass: (classId: string) => void;
 }) {
   return (
-    <section className="rounded-3xl border border-white/10 bg-white/[0.02] p-6">
-      <h3 className="text-lg font-bold text-white">{title}</h3>
-      <div className="mt-4 overflow-x-auto rounded-xl">
+    <section className="rounded-3xl border border-white/10 bg-white/[0.02] p-4 sm:p-6">
+      <h3 className="text-base font-bold text-white sm:text-lg">{title}</h3>
+      <MobileScheduleList
+        columns={columns}
+        slots={slots}
+        sessions={sessions}
+        liveId={liveId}
+        classes={classes}
+        teachers={teachers}
+        showSeatDots={showSeatDots}
+        onJumpToClass={onJumpToClass}
+      />
+      <div className="mt-4 hidden overflow-x-auto rounded-xl sm:block">
         <table className="w-full min-w-0 table-fixed border-separate border-spacing-1 text-[10px] sm:border-spacing-2 sm:text-xs">
           <thead>
             <tr>
@@ -254,7 +346,7 @@ function ScheduleMatrix({
                 <td className="rounded-xl border border-white/10 bg-deepSpace/60 px-1 py-2 text-center text-[10px] font-semibold text-white/85 sm:px-3 sm:py-3 sm:text-xs">{slot.label}</td>
                 {columns.map((column) => {
                   const cellSessions = findSessionsForCell(sessions, column.day, slot);
-                  const isWedThuNoClassLateSlot = slot.id === "wd-3" && (column.day === 3 || column.day === 4) && cellSessions.length === 0;
+                  const isWedThuNoClassLateSlot = shouldHideEmptySlot(column.day, slot, cellSessions);
                   return (
                     <td
                       key={`${slot.id}-${column.day}`}
