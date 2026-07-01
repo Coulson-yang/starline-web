@@ -29,15 +29,15 @@ export function HomePreviewGallery({ items }: { items: GalleryItem[] }) {
 
   return (
     <section className="mx-auto w-full max-w-none px-0">
-      <div className="relative h-screen overflow-hidden bg-white/[0.04] sm:rounded-none">
-        <div className="-mx-1 flex h-full snap-x snap-mandatory items-center gap-3 overflow-x-auto px-1 lg:hidden">
+      <div className="relative overflow-hidden bg-white/[0.04] sm:rounded-none lg:h-screen">
+        <div className="flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 py-5 lg:hidden">
           {items.map((item) => (
-            <figure key={`mobile-${item.id}`} className="relative aspect-[16/10] w-[94%] shrink-0 snap-start overflow-hidden rounded-2xl">
+            <figure key={`mobile-${item.id}`} className="relative aspect-[3/2] w-[88vw] max-w-[420px] shrink-0 snap-start overflow-hidden rounded-2xl">
               <Image src={item.imageUrl} alt={item.caption} fill className="scale-[1.03] object-cover object-center" sizes="94vw" onError={onImgError} />
               <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[#020712]/75 to-transparent" />
-              <figcaption className="absolute inset-x-0 bottom-0 bg-black/45 p-4 text-center">
-                <p className="text-base font-semibold text-white">{item.caption}</p>
-                <p className="mt-1 text-sm font-semibold text-accent">{captionEnMap[item.id] ?? item.caption}</p>
+              <figcaption className="absolute inset-x-0 bottom-0 bg-black/45 p-3 text-center">
+                <p className="text-sm font-semibold text-white">{item.caption}</p>
+                <p className="mt-1 text-xs font-semibold text-accent">{captionEnMap[item.id] ?? item.caption}</p>
               </figcaption>
             </figure>
           ))}
