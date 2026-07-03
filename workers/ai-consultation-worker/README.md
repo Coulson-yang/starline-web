@@ -26,7 +26,7 @@ copy wrangler.toml.example wrangler.toml
 4. 修改 `wrangler.toml`：
 
 ```toml
-ALLOWED_ORIGIN = "https://你的官网域名"
+ALLOWED_ORIGIN = "https://你的官网域名,http://localhost:3001"
 DEEPSEEK_BASE_URL = "https://api.deepseek.com"
 DEEPSEEK_MODEL = "deepseek-v4-pro"
 ```

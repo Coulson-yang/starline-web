@@ -140,8 +140,13 @@ function parseAssistantJson(content) {
 
 function buildCorsHeaders(request, env) {
   const requestOrigin = request.headers.get("Origin") || "";
-  const allowedOrigin = env.ALLOWED_ORIGIN || "*";
-  const origin = allowedOrigin === "*" || allowedOrigin === requestOrigin ? allowedOrigin === "*" ? "*" : requestOrigin : allowedOrigin;
+  const allowedOrigins = String(env.ALLOWED_ORIGIN || "")
+    .split(",")
+    .map((origin) => origin.trim())
+    .filter(Boolean);
+  const allowsAnyOrigin = allowedOrigins.includes("*");
+  const isAllowed = allowsAnyOrigin || allowedOrigins.includes(requestOrigin);
+  const origin = allowsAnyOrigin ? "*" : isAllowed ? requestOrigin : allowedOrigins[0] || "";
 
   return {
     "Access-Control-Allow-Origin": origin,
