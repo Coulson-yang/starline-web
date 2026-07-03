@@ -13,7 +13,8 @@ type AssistantResponse = {
   suggestedQuestions?: string[];
 };
 
-const endpoint = process.env.NEXT_PUBLIC_AI_ASSISTANT_ENDPOINT;
+const defaultEndpoint = "https://yingchuang-ai-consultation.yingchuang-start.workers.dev";
+const endpoint = process.env.NEXT_PUBLIC_AI_ASSISTANT_ENDPOINT || defaultEndpoint;
 
 const starterQuestions = ["孩子零基础可以学吗？", "你们怎么收费？", "外教是哪里的？", "怎么预约试听？"];
 
