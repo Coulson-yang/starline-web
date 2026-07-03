@@ -41,6 +41,27 @@ npm run start
 
 复制 `.env.example` 为 `.env.local`，设置 `NEXT_PUBLIC_SITE_URL` 为正式域名，用于 `metadataBase` 与结构化数据中的 `url` 字段。
 
+## 前台 AI 咨询助手
+
+网站右下角已接入“英创起点 AI 咨询”浮窗。由于官网是静态网页，DeepSeek API Key 不能放在前端代码里，需要通过 Cloudflare Worker 作为安全中间层。
+
+部署 Worker：
+
+```bash
+cd workers/ai-consultation-worker
+copy wrangler.toml.example wrangler.toml
+wrangler secret put DEEPSEEK_API_KEY
+wrangler deploy
+```
+
+部署成功后，把 Worker 地址写入官网环境变量：
+
+```env
+NEXT_PUBLIC_AI_ASSISTANT_ENDPOINT=https://your-worker-name.your-subdomain.workers.dev
+```
+
+然后重新构建并发布官网。未配置 `NEXT_PUBLIC_AI_ASSISTANT_ENDPOINT` 时，浮窗会显示温和的占位回复，不会暴露错误给家长。
+
 ## 部署提示
 
 - 推荐使用 Vercel / Netlify / 任意支持 Node 的托管运行 `next start`，或 `next build` 后的 standalone 输出。
