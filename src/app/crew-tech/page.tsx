@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { getInstitutionData } from "@/lib/get-institution-data";
+import { MissionGallery } from "@/components/MissionGallery";
 import { siteDescription } from "@/lib/site";
 import constants from "@/data/constants.json";
 
@@ -17,7 +18,7 @@ export default async function CrewTechPage() {
   const teacherQuotes = ui.teacherQuotes as Record<string, { en: string; zh: string }>;
 
   return (
-    <div className="mx-auto max-w-6xl space-y-16 px-4 py-12">
+    <div className="mx-auto max-w-6xl space-y-14 px-4 pb-32 pt-10 sm:space-y-16 sm:py-12">
       <header className="space-y-3">
         <p className="text-xs font-semibold uppercase tracking-[0.3em] text-accent">{ui.header.eyebrow}</p>
         <h1 className="text-4xl font-black tracking-tighter text-white sm:text-5xl">{ui.header.title}</h1>
@@ -86,22 +87,7 @@ export default async function CrewTechPage() {
       </section>
 
 
-      <section className="space-y-6">
-        <div className="flex items-center justify-between">
-          <h2 className="text-2xl font-black tracking-tight text-white">{ui.sections.galleryTitle}</h2>
-          <span className="text-xs uppercase tracking-[0.3em] text-white/40">{ui.sections.gallerySub}</span>
-        </div>
-        <div className="grid gap-4 md:grid-cols-3">
-          {data.gallery.map((item) => (
-            <figure key={item.id} className="overflow-hidden rounded-3xl border border-white/10 bg-white/[0.02]">
-              <div className="relative h-56 w-full">
-                <Image src={item.imageUrl} alt={item.caption} fill className="object-cover" sizes="(min-width: 768px) 33vw, 100vw" />
-              </div>
-              <figcaption className="px-4 py-3 text-sm text-white/70">{item.caption}</figcaption>
-            </figure>
-          ))}
-        </div>
-      </section>
+      <MissionGallery items={data.gallery} title={ui.sections.galleryTitle} subtitle={ui.sections.gallerySub} />
     </div>
   );
 }

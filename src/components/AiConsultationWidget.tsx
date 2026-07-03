@@ -114,12 +114,18 @@ export function AiConsultationWidget() {
     return null;
   }
 
+  const containerClassName = isOpen
+    ? "ai-consultation-pop fixed bottom-0 left-0 right-0 z-50 sm:bottom-6 sm:left-auto sm:right-6"
+    : "ai-consultation-pop fixed bottom-3 left-3 right-3 z-50 sm:bottom-6 sm:left-auto sm:right-6";
+
   return (
-    <div className="ai-consultation-pop fixed bottom-4 right-4 z-50 sm:bottom-6 sm:right-6">
+    <div className={containerClassName}>
       {isOpen ? (
-        <section className="ai-consultation-panel flex h-[620px] max-h-[calc(100vh-2rem)] w-[calc(100vw-2rem)] max-w-[390px] flex-col overflow-hidden rounded-lg border border-white/15 bg-[#08111f]/95 shadow-2xl shadow-black/40 backdrop-blur-xl">
-          <header className="flex items-center justify-between border-b border-white/10 bg-white/[0.04] px-4 py-3">
-            <div>
+        <section className="ai-consultation-panel flex h-[82dvh] max-h-[calc(100dvh-0.75rem)] w-full flex-col overflow-hidden rounded-t-2xl border border-white/15 bg-[#08111f]/95 shadow-2xl shadow-black/40 backdrop-blur-xl sm:h-[620px] sm:max-h-[calc(100vh-2rem)] sm:w-[calc(100vw-2rem)] sm:max-w-[390px] sm:rounded-lg">
+          <header className="border-b border-white/10 bg-white/[0.04] px-4 pb-3 pt-2 sm:py-3">
+            <div className="mx-auto mb-2 h-1 w-12 rounded-full bg-white/20 sm:hidden" />
+            <div className="flex items-center justify-between">
+            <div className="min-w-0">
               <p className="text-sm font-semibold text-white">英创起点 AI 咨询</p>
               <p className="text-xs text-white/55">课程问题先初步了解，重要信息以老师确认为准</p>
             </div>
@@ -131,9 +137,10 @@ export function AiConsultationWidget() {
             >
               ×
             </button>
+            </div>
           </header>
 
-          <div className="flex-1 space-y-3 overflow-y-auto px-4 py-4">
+          <div className="flex-1 space-y-3 overflow-y-auto px-4 py-4 pb-5">
             {messages.map((message, index) => (
               <div key={`${message.role}-${index}`} className={message.role === "parent" ? "flex justify-end" : "flex justify-start"}>
                 <div
@@ -154,14 +161,14 @@ export function AiConsultationWidget() {
             ) : null}
           </div>
 
-          <div className="border-t border-white/10 px-4 py-3">
-            <div className="mb-3 flex flex-wrap gap-2">
+          <div className="border-t border-white/10 bg-[#08111f]/95 px-4 pb-4 pt-3">
+            <div className="mb-3 flex gap-2 overflow-x-auto pb-1 sm:flex-wrap sm:overflow-visible sm:pb-0">
               {suggestedQuestions.map((question) => (
                 <button
                   key={question}
                   type="button"
                   onClick={() => void sendMessage(question)}
-                  className="rounded-full border border-white/10 px-3 py-1.5 text-xs text-white/70 transition hover:border-accent/60 hover:text-white"
+                  className="shrink-0 rounded-full border border-white/10 px-3 py-1.5 text-xs text-white/70 transition hover:border-accent/60 hover:text-white"
                 >
                   {question}
                 </button>
@@ -189,7 +196,7 @@ export function AiConsultationWidget() {
         <button
           type="button"
           onClick={openWidget}
-          className="ai-consultation-beacon group relative flex items-center gap-3 overflow-visible rounded-full border border-white/15 bg-[#08111f]/90 py-2 pl-2 pr-4 text-left shadow-2xl shadow-black/40 backdrop-blur-xl transition hover:border-accent/60"
+          className="ai-consultation-beacon group relative flex w-full items-center gap-3 overflow-visible rounded-2xl border border-white/15 bg-[#08111f]/95 py-2 pl-2 pr-3 text-left shadow-2xl shadow-black/40 backdrop-blur-xl transition hover:border-accent/60 sm:w-auto sm:rounded-full sm:pr-4"
           aria-label="打开 AI 课程咨询"
         >
           <span className="pointer-events-none absolute inset-0 rounded-full border border-accent/55" />
@@ -197,9 +204,12 @@ export function AiConsultationWidget() {
           <span className="flex h-14 w-14 items-center justify-center overflow-hidden rounded-full border border-white/20 bg-white shadow-lg shadow-accent/20">
             <img src="/images/brand-logo.png" alt="英创起点" className="h-[124%] w-[124%] object-contain" />
           </span>
-          <span className="hidden sm:block">
-            <span className="block text-sm font-semibold text-white">课程咨询</span>
-            <span className="block text-xs text-white/55 group-hover:text-white/70">问年龄、价格、试听</span>
+          <span className="min-w-0 flex-1 sm:flex-none">
+            <span className="block truncate text-sm font-semibold text-white">英创起点课程咨询</span>
+            <span className="block truncate text-xs text-white/55 group-hover:text-white/70">问年龄、价格、试听，先帮您初步看看</span>
+          </span>
+          <span className="rounded-full bg-accent px-3 py-1.5 text-xs font-semibold text-white sm:hidden">
+            打开
           </span>
         </button>
       )}
