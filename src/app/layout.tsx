@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { MissionBackdrop } from "@/components/MissionBackdrop";
-import { AiConsultationWidget } from "@/components/AiConsultationWidget";
 import { OrganizationJsonLd } from "@/components/OrganizationJsonLd";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -42,7 +41,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <SiteHeader brandName={data.brand.name} trialHref={data.brand.trialCtaHref} trialLabel={data.brand.trialCtaLabel} />
         <main>{children}</main>
         <SiteFooter brandName={data.brand.name} />
-        <AiConsultationWidget />
       </body>
     </html>
   );

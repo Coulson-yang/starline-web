@@ -7,6 +7,7 @@ import { HomePreviewGallery } from "@/components/HomePreviewGallery";
 import { ClassroomTypesCarousel } from "@/components/ClassroomTypesCarousel";
 import { HeroVideoBackground } from "@/components/HeroVideoBackground";
 import { AboutHeroSection } from "@/components/AboutHeroSection";
+import { AiConsultationWidget } from "@/components/AiConsultationWidget";
 import { getInstitutionData } from "@/lib/get-institution-data";
 
 export default async function HomePage() {
@@ -278,6 +279,8 @@ export default async function HomePage() {
           ))}
         </div>
       </section>
+
+      <AiConsultationWidget />
     </div>
   );
 }
